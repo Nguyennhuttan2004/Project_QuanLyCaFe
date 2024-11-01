@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
   user: null,
 };
 
@@ -15,7 +15,7 @@ export const registerUser = createAsyncThunk(
       "http://localhost:5000/api/auth/register",
       formData,
       {
-        withCredentials: false,
+        withCredentials: true,
       }
     );
 
@@ -31,7 +31,7 @@ export const loginUser = createAsyncThunk(
       "http://localhost:5000/api/auth/login",
       formData,
       {
-        withCredentials: false,
+        withCredentials: true,
       }
     );
 

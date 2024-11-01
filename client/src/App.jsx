@@ -15,6 +15,12 @@ import ShoppingCheckout from "./pages/shopping-view/checkout";
 import CheckAuth from "./components/common/check-auth";
 import UnauthPage from "./pages/unauth-page";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { checkAuth } from "./../store/auth-slice";
+import { useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import AdminLayout from "./components/admin-view/layout";
+import ShoppingLayout from "./components/shopping-view/layout";
 
 function App() {
   // const isAuthenticated = true;
@@ -22,7 +28,16 @@ function App() {
   //   name: 'Nhuttan',
   //   role: "user",
   // };
-  const {user,isAuthenticated} = useSelector(state => state.auth)
+  const {user,isAuthenticated, isLoading} = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+
+  console.log(isLoading, user); 
 
   return (
     <>
@@ -43,7 +58,7 @@ function App() {
             path="/admin"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-                <AuthLayout />
+                 <AdminLayout />
               </CheckAuth>
             }
           >
@@ -56,7 +71,7 @@ function App() {
             path="/shop"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-                <AuthLayout />
+                 <ShoppingLayout />
               </CheckAuth>
             }
           >

@@ -16,7 +16,7 @@ const initialState = {
 const Register = () => {
 
 
-  const [formData, setFromData] = useState(initialState)
+  const [formData, setFormData] = useState(initialState)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {toast} = useToast()
@@ -55,7 +55,7 @@ const Register = () => {
         formControls={registerFormControls}
         buttonText ={'Sign Up'}
         formData={formData}
-        setFromData={setFromData}
+        setFormData={setFormData}
         onSubmit={onSubmit}
       />
     </div>

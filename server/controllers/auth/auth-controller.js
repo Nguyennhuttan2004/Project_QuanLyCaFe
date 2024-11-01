@@ -46,29 +46,41 @@ const loginUser = async (req, res) => {
         message: "Người dùng không tồn tại! Vui lòng đăng ký trước",
       });
 
-      const checkPasswordMatch = await bcrypt.compare(password, checkUser.password)
-      if(!checkPasswordMatch)
-        return res.json({
-          success: false,
-          message: "Sai password, vui long thu lai",
-        });
+    const checkPasswordMatch = await bcrypt.compare(
+      password,
+      checkUser.password
+    );
+    if (!checkPasswordMatch)
+      return res.json({
+        success: false,
+        message: "Sai password, vui long thu lai",
+      });
 
-        const token = jwt.sign({
-          id: checkUser._id, role: checkUser.role, email: checkUser.email
-        },'CLIENT_SECRET_KEY',{expiresIn:'60m'})
-        
-        
-        res.cookie('token',token,{httpOnly:true, secure: false}).json({
-          success: true,
-          message: "Đăng nhập thành công",
-          user: {
-            email: checkUser.email,
-            role: checkUser.role,
-            id: checkUser._id
-          },
-        })
+    const token = jwt.sign(
+      {
+        id: checkUser._id,
+        role: checkUser.role,
+        email: checkUser.email,
+        userName: checkUser.userName
+      },
+      "CLIENT_SECRET_KEY",
+      { expiresIn: "60m" }
+    );
 
-
+    res.cookie("token", token, { 
+      httpOnly: true, // Ngăn chặn truy cập từ JavaScript
+      secure: false,  // Đặt true nếu bạn sử dụng HTTPS
+      sameSite: 'Strict' // Ngăn chặn cookie được gửi trong các yêu cầu cross-site
+    }).json({
+      success: true,
+      message: "Đăng nhập thành công",
+      user: {
+        email: checkUser.email,
+        role: checkUser.role,
+        id: checkUser._id,
+        userName: checkUser.userName
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -78,14 +90,13 @@ const loginUser = async (req, res) => {
   }
 };
 
-//logout 
+//logout
 const logoutUser = (req, res) => {
   res.clearCookie("token").json({
     success: true,
     message: "Đăng xuất thành công!",
   });
 };
-
 
 // auth middleware
 const authMiddleware = async (req, res, next) => {
@@ -108,5 +119,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-
-module.exports = { registerUser, loginUser, logoutUser , authMiddleware };
+module.exports = { registerUser, loginUser, logoutUser, authMiddleware };
