@@ -130,7 +130,7 @@ function AdminProducts() {
         open={openCreateProductsDialog}
         onOpenChange={() => {
           setOpenCreateProductsDialog(false);
-          setCurrentEditedId(null)
+          setCurrentEditedId(null);
           setFormData(initialFormData);
         }}
       >

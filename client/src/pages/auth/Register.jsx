@@ -45,15 +45,15 @@ const Register = () => {
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Create new account </h1>
-        <p className="mt-2">Already have an account
-         <Link className="font-medium text-primary ml-2 hover:underline " to='/auth/login'>Login</Link> 
+      <div className="">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground"> Tạo tài khoản mới </h1>
+        <p className="mt-2">Nếu đã có tài khoản!!! Hãy đến trang này
+         <Link className="font-medium text-primary ml-2 hover:underline " to='/auth/login'>Đăng nhập</Link> 
            </p>
       </div>
       <CommonForm
         formControls={registerFormControls}
-        buttonText ={'Sign Up'}
+        buttonText ={'Đăng ký'}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}

@@ -40,15 +40,15 @@ const Login = () => {
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Sign in to your account</h1> {/* Fixed typo in "Sign" */}
-        <p className="mt-2">Don't have an account 
-          <Link className="font-medium text-primary ml-2 hover:underline" to='/auth/register'>Register</Link>
+      <div className="">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Đăng nhập  tài khoản của bạn</h1> {/* Fixed typo in "Sign" */}
+        <p className="mt-2"> Không có tài khoản!!! Hãy đăng ký tại đây:
+          <Link className="font-bold text-primary ml-2 hover:underline" to='/auth/register'>Đăng ký</Link>
         </p>
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={'Sign In'}
+        buttonText={'Đăng nhập'}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}

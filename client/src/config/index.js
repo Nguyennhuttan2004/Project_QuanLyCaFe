@@ -142,7 +142,7 @@ export const shoppingViewHeaderMenuItems = [
 
   export const filterOptions = {
     category: [
-      { id: "bestSeller", label: "Bestseller" },
+      { id: "bestSeller", label: "Best Seller" },
       { id: "traSua", label: "Trà Sữa" },
       { id: "caPhe", label: "Cà Phê" },
       { id: "banhNgot", label: "Bánh Ngọt" },
@@ -156,8 +156,8 @@ export const shoppingViewHeaderMenuItems = [
   };
 
   export const sortOptions = [
-    { id: "price-lowtohigh", label: "Price: Low to High" },
-    { id: "price-hightolow", label: "Price: High to Low" },
+    { id: "price-lowtohigh", label: "Price: Tăng dần" },
+    { id: "price-hightolow", label: "Price: Giảm dần" },
     { id: "title-atoz", label: "Title: A to Z" },
     { id: "title-ztoa", label: "Title: Z to A" },
   ];
@@ -170,4 +170,39 @@ export const shoppingViewHeaderMenuItems = [
     daXay: "daXay",
   };
 
-  
+  export const addressFormControls = [
+    {
+      label: "Address",
+      name: "address",
+      componentType: "input",
+      type: "text",
+      placeholder: "Enter your address",
+    },
+    {
+      label: "City",
+      name: "city",
+      componentType: "input",
+      type: "text",
+      placeholder: "Enter your city",
+    },
+    {
+      label: "Pincode",
+      name: "pincode",
+      componentType: "input",
+      type: "text",
+      placeholder: "Enter your pincode",
+    },
+    {
+      label: "Phone",
+      name: "phone",
+      componentType: "input",
+      type: "text",
+      placeholder: "Enter your phone number",
+    },
+    {
+      label: "Notes",
+      name: "notes",
+      componentType: "textarea",
+      placeholder: "Enter any additional notes",
+    },
+  ];

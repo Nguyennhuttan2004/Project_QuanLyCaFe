@@ -21,6 +21,8 @@ import { useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import AdminLayout from "./components/admin-view/layout";
 import ShoppingLayout from "./components/shopping-view/layout";
+import PaypalReturnPage from "./pages/shopping-view/paypal-return";
+import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 
 function App() {
   // const isAuthenticated = true;
@@ -79,6 +81,9 @@ function App() {
             <Route path="home" element={<ShoppingHome />} />
             <Route path="checkout" element={<ShoppingCheckout />} />
             <Route path="account" element={<ShoppingAccount />} />
+            <Route path="paypal-return" element={<PaypalReturnPage />} />
+            <Route path="payment-success" element={<PaymentSuccessPage />} />
+            {/* <Route path="search" element={<SearchProducts />} /> */}
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="/unauth-page" element={<UnauthPage />} />
