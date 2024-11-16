@@ -6,7 +6,10 @@ const getFilteredProducts = async (req, res) => {
 
     let filters = {};
     if (category.length) {
-      filters.category = { $in: category.split(",") };
+      filters = { category: { $in: category.split(",") } };
+    }
+    if (!category.length) {
+      filters = { category: "bestSeller" };
     }
 
     let sort = {};
@@ -34,9 +37,9 @@ const getFilteredProducts = async (req, res) => {
         sort.price = 1;
         break;
     }
-
+    console.log(filters);
     const products = await Product.find(filters).sort(sort);
-
+    console.log(products);
     res.status(200).json({
       success: true,
       data: products,
@@ -74,4 +77,4 @@ const getProductDetails = async (req, res) => {
   }
 };
 
-module.exports = { getFilteredProducts ,getProductDetails};
+module.exports = { getFilteredProducts, getProductDetails };

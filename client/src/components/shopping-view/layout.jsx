@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom"
 import ShoppingHeader from "./header"
+import AuthFooter from "../common/footer"
 
 function ShoppingLayout() {
     return(
@@ -9,7 +10,8 @@ function ShoppingLayout() {
             <main className="flex flex-col w-full">
                 <Outlet/>
             </main>
-        </div>
+            {/* <AuthFooter/> */}
+        </div> 
     )
 }
 

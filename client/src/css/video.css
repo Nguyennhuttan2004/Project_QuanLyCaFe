@@ -1,0 +1,28 @@
+.digital{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.digital_title .sub_title{
+    text-align: center;
+    color: #AF2239;
+    padding-top: 50px ;
+}
+.digital_title p:last-child{
+    text-align: center;
+    font-size: 16px;
+    color: #888888;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+   
+}
+.digital_title h2{
+    font-size: 50px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+}
+.digital_content video{
+    width: 100%;
+}

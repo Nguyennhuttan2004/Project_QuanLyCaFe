@@ -19,7 +19,7 @@ function AddressCard({
       }
       className={`cursor-pointer border rounded-lg shadow-lg transition-transform transform hover:scale-105 ${
         selectedId?._id === addressInfo?._id
-          ? "border-red-900 border-[4px]"
+          ? "border-red-500 border-[4px]"
           : "border-gray-300"
       }`}
     >

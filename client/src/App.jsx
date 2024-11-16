@@ -23,6 +23,7 @@ import AdminLayout from "./components/admin-view/layout";
 import ShoppingLayout from "./components/shopping-view/layout";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
+import SearchProducts from "./pages/shopping-view/search";
 
 function App() {
   // const isAuthenticated = true;
@@ -30,8 +31,10 @@ function App() {
   //   name: 'Nhuttan',
   //   role: "user",
   // };
-  const {user,isAuthenticated, isLoading} = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const { user, isAuthenticated, isLoading } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -39,12 +42,21 @@ function App() {
 
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
-  console.log(isLoading, user); 
+  console.log(isLoading, user);
 
   return (
     <>
       <div className="flex flex-col overflow-hidden bg-white">
         <Routes>
+          <Route
+            path="/"
+            element={
+              <CheckAuth
+                isAuthenticated={isAuthenticated}
+                user={user}
+              ></CheckAuth>
+            }
+          />
           <Route
             path="/auth"
             element={
@@ -60,7 +72,7 @@ function App() {
             path="/admin"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-                 <AdminLayout />
+                <AdminLayout />
               </CheckAuth>
             }
           >
@@ -73,7 +85,7 @@ function App() {
             path="/shop"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-                 <ShoppingLayout />
+                <ShoppingLayout />
               </CheckAuth>
             }
           >
@@ -83,7 +95,7 @@ function App() {
             <Route path="account" element={<ShoppingAccount />} />
             <Route path="paypal-return" element={<PaypalReturnPage />} />
             <Route path="payment-success" element={<PaymentSuccessPage />} />
-            {/* <Route path="search" element={<SearchProducts />} /> */}
+            <Route path="search" element={<SearchProducts />} />
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="/unauth-page" element={<UnauthPage />} />

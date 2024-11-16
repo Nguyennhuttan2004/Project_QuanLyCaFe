@@ -51,8 +51,6 @@ function MenuItems() {
       : navigate(getCurrentMenuItem.path);
   }
 
-  
-
   return (
     <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
@@ -86,8 +84,6 @@ function HeaderRightContent() {
     dispatch(fetchCartItems(user?.id));
   }, [dispatch]);
 
-
-
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
@@ -98,16 +94,24 @@ function HeaderRightContent() {
           className="relative"
         >
           <ShoppingCart className="w-6 h-6" />
+
+          {/* Badge hiển thị số lượng sản phẩm */}
+          {cartItems?.items?.length > 0 && (
+            <span className="absolute top-[-5px] right-[-4px] bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs animate-bounce">
+              {cartItems.items.length}
+            </span>
+          )}
+
           <span className="sr-only">Giỏ Hàng của bạn</span>
         </Button>
         <UserCartWrapper
-              setOpenCartSheet={setOpenCartSheet}
-              cartItems={
-                cartItems && cartItems.items && cartItems.items.length > 0
-                  ? cartItems.items
-                  : []
-              }
-            />
+          setOpenCartSheet={setOpenCartSheet}
+          cartItems={
+            cartItems && cartItems.items && cartItems.items.length > 0
+              ? cartItems.items
+              : []
+          }
+        />
       </Sheet>
 
       <DropdownMenu>

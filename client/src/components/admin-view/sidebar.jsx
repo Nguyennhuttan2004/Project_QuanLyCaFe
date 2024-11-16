@@ -1,5 +1,6 @@
 import {
     BadgeCheck,
+    BookHeart,
     ChartNoAxesCombined,
     LayoutDashboard,
     ShoppingBasket,
@@ -27,6 +28,13 @@ import {
       path: "/admin/orders",
       icon: <BadgeCheck />,
     },
+    {
+      id: "features",
+      label: "Banner",
+      path: "/admin/features",
+      icon: <BookHeart />
+    },
+
   ];
   
   function MenuItems({ setOpen }) {
