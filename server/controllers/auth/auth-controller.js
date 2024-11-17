@@ -40,6 +40,7 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const checkUser = await User.findOne({ email });
+    console.log({checkUser})
     if (!checkUser)
       return res.json({
         success: false,
@@ -61,26 +62,30 @@ const loginUser = async (req, res) => {
         id: checkUser._id,
         role: checkUser.role,
         email: checkUser.email,
-        userName: checkUser.userName
+        userName: checkUser.userName,
+        avatar: checkUser?.avatar,
       },
       "CLIENT_SECRET_KEY",
       { expiresIn: "60m" }
     );
 
-    res.cookie("token", token, { 
-      httpOnly: true, // Ngăn chặn truy cập từ JavaScript
-      secure: false,  // Đặt true nếu bạn sử dụng HTTPS
-      sameSite: 'Strict' // Ngăn chặn cookie được gửi trong các yêu cầu cross-site
-    }).json({
-      success: true,
-      message: "Đăng nhập thành công",
-      user: {
-        email: checkUser.email,
-        role: checkUser.role,
-        id: checkUser._id,
-        userName: checkUser.userName
-      },
-    });
+    res
+      .cookie("token", token, {
+        httpOnly: true, // Ngăn chặn truy cập từ JavaScript
+        secure: false, // Đặt true nếu bạn sử dụng HTTPS
+        sameSite: "Strict", // Ngăn chặn cookie được gửi trong các yêu cầu cross-site
+      })
+      .json({
+        success: true,
+        message: "Đăng nhập thành công",
+        user: {
+          email: checkUser.email,
+          role: checkUser.role,
+          id: checkUser._id,
+          userName: checkUser.userName,
+          avatar: checkUser?.avatar,
+        },
+      });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -109,7 +114,16 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
-    req.user = decoded;
+
+    // db
+    // console.log({123: decoded})
+
+    // req.user = await User.findOne({_id:  decoded._id});
+
+    // console.log({456: req.user})
+    req.user = decoded
+    
+
     next();
   } catch (error) {
     res.status(401).json({
@@ -118,5 +132,6 @@ const authMiddleware = async (req, res, next) => {
     });
   }
 };
+// upload avatar
 
 module.exports = { registerUser, loginUser, logoutUser, authMiddleware };

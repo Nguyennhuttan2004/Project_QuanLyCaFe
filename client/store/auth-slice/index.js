@@ -75,11 +75,14 @@ export const checkAuth = createAsyncThunk(
   }
 );
 
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => {},
+    setUser: (state, action) => {
+      state.user = action.payload; // Cập nhật user
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -128,7 +131,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
-      }); 
+      })
   },
 });
 

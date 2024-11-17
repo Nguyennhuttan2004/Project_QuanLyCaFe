@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
+    id: {
+        type: String, 
+        required: true,
+        unique: true,
+    },
     userName : {
         type: String,
         require: true,
@@ -18,7 +23,13 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'user'
+    },
+    avatar: { // Thêm trường avatar
+        type: String,
+        default: null // Hoặc có thể để trống nếu không có giá trị mặc định
     }
+
+  
 })
 
 const User = mongoose.model('User', UserSchema)

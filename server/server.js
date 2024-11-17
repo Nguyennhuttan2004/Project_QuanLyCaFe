@@ -2,6 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const bodyParser = require("body-parser"); 
+const path = require('path');
+
+const avatarRouter = require('./routes/auth/avatar-route.js');
 const authRouter = require("./routes/auth/auth-route.js")
 const adminProductsRouter = require('./routes/admin/products-routes.js');
 const adminOrderRouter = require("./routes/admin/order-routes.js"); 
@@ -42,7 +46,15 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("."))
+
+app.use('/api', avatarRouter)
+
 app.use("/api/auth", authRouter)
+// app.use('/api/auth', avatarRouter); 
+
 app.use('/api/admin/products',adminProductsRouter)
 app.use("/api/admin/orders", adminOrderRouter);
 

@@ -18,7 +18,6 @@ import { fetchProductDetails } from "/store/shop/products-slice";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { addToCart, fetchCartItems } from "/store/shop/cart-slice";
 import { useToast } from "@/hooks/use-toast";
-import Footer from "@/components/common/footer";
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];

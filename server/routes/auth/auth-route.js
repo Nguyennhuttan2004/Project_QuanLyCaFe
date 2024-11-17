@@ -1,4 +1,6 @@
 const express = require("express");
+const upload = require("../../helpers/upload-avatar.multer"); 
+const path = require("path"); 
 const {
   registerUser,
   loginUser,
@@ -18,5 +20,6 @@ router.get("/check-auth", authMiddleware, (req, res) => {
     user,
   });
 });
+
 
 module.exports = router;

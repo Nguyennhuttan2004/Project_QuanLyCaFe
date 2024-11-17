@@ -23,6 +23,8 @@ import { logoutUser } from "../../../store/auth-slice";
 import UserCartWrapper from "./cart-wrapper.jsx";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "/store/shop/cart-slice";
+import { DOMAIN_BE, FOLDER_IMAGE_BE } from "@/lib/constant";
+// import { DOMAIN_BE, FOLDER_IMAGE_BE } from "@/lib/constant";
 function MenuItems() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -116,10 +118,19 @@ function HeaderRightContent() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black">
-            <AvatarFallback className="bg-black text-white font-extrabold">
-              {user?.userName[0].toUpperCase()}
-            </AvatarFallback>
+          
+        <Avatar className="">
+            {user?.avatar ? (
+              <img
+                src={`${DOMAIN_BE}${FOLDER_IMAGE_BE}${user?.avatar}`}
+                alt="User Avatar"
+                className="w-full h-full rounded-full"
+              />
+            ) : (
+              <AvatarFallback className="bg-black text-white font-extrabold">
+                {user?.userName[0].toUpperCase()}
+              </AvatarFallback>
+            )}
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" className="w-56">
