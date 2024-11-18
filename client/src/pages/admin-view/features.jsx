@@ -21,10 +21,11 @@ function AdminFeatures() {
           }
         });
       }
-    
       useEffect(() => {
-        dispatch(getFeatureImages());
-      }, [dispatch]);
+        dispatch(getFeatureImages()).then((response) => {
+            console.log("Feature Image List Response:", response);
+        });
+    }, [dispatch]);
     
 
   return (
@@ -37,7 +38,6 @@ function AdminFeatures() {
         setImageLoadingState={setImageLoadingState}
         imageLoadingState={imageLoadingState}
         isCustomStyling={true}
-        // isEditMode={currentEditedId !== null}
       />
         <Button onClick={handleUploadFeatureImage} className="mt-5 w-full">
         Upload

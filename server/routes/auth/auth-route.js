@@ -6,6 +6,7 @@ const {
   loginUser,
   logoutUser,
   authMiddleware,
+  getTotalUsers
 } = require("../../controllers/auth/auth-controller");
 
 const router = express.Router();
@@ -20,6 +21,8 @@ router.get("/check-auth", authMiddleware, (req, res) => {
     user,
   });
 });
+router.get('/total-users', getTotalUsers);
+
 
 
 module.exports = router;

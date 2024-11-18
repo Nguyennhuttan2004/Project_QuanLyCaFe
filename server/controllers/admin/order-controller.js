@@ -78,9 +78,53 @@ const updateOrderStatus = async (req, res) => {
     });
   }
 };
+const getTotalOrders = async (req, res) => {
+  try {
+    const totalOrders = await Order.countDocuments();
+    res.status(200).json({ totalOrders });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+const getTotalRevenue = async (req, res) => {
+  try {
+    const totalRevenue = await Order.aggregate([
+      { $group: { _id: null, total: { $sum: "$totalAmount" } } }
+    ]);
+    res.status(200).json({ totalRevenue: totalRevenue[0]?.total || 0 });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+const getSalesPerMonth = async (req, res) => {
+  try {
+    const orders = await Order.find();
+
+    const salesPerMonth = orders.reduce((acc, order) => {
+      const monthIndex = new Date(order.createdAt).getMonth(); // 0 for January --> 11 for December
+      acc[monthIndex] = (acc[monthIndex] || 0) + order.totalAmount;
+      return acc;
+    }, {});
+
+    const graphData = Array.from({ length: 12 }, (_, i) => {
+      const month = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(0, i));
+      return { name: month, sales: salesPerMonth[i] || 0 };
+    });
+
+    res.status(200).json({ success: true, data: graphData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Some error occurred!" });
+  }
+};
+
+
 
 module.exports = {
   getAllOrdersOfAllUsers,
   getOrderDetailsForAdmin,
   updateOrderStatus,
+  getTotalOrders,
+  getTotalRevenue,
+  getSalesPerMonth,
 };

@@ -132,6 +132,17 @@ const authMiddleware = async (req, res, next) => {
     });
   }
 };
-// upload avatar
+//getTotalUsers
+const getTotalUsers = async (req, res) => {
+  try {
+    const users = await User.find({}); // Fetch all users
+    const totalUsers = users.length; // Total number of users
+    const admins = users.filter(user => user.role === 'admin').length; // Count admins
+    const regularUsers = users.filter(user => user.role === 'user').length; // Count regular users
 
-module.exports = { registerUser, loginUser, logoutUser, authMiddleware };
+    res.status(200).json({ totalUsers, admins, regularUsers });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+module.exports = { registerUser, loginUser, logoutUser, authMiddleware,getTotalUsers };

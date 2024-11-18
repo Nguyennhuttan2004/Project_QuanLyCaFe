@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+  box-sizing: border-box;
+
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+footer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -22,6 +22,7 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import "./../../css/video.css";
 import videoSource from "./../../assets/coffeeshop.mp4";
 import imageVideo from "./../../assets/videoimage.jpg";
+import { getFeatureImages } from "/store/common/common-slice";
 
 const categories = [
   { id: "bestSeller", label: "Best Seller", icon: LucideCoffee },
@@ -61,6 +62,12 @@ function ShoppingHome() {
       })
     );
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFeatureImages()).then((response) => {
+        console.log("Feature Image List Response:", response);
+    });
+}, [dispatch]);
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
@@ -116,22 +123,25 @@ function ShoppingHome() {
   useEffect(() => {
     if (productDetails !== null) setOpenDetailsDialog(true);
   }, [productDetails]);
-
+  console.log("Feature Image List:", featureImageList);
   return (
     <>
       <div className="flex flex-col min-h-screen">
         <div className="relative w-full h-[600px] overflow-hidden">
-          {featureImageList && featureImageList.length > 0
-            ? featureImageList.map((slide, index) => (
-                <img
-                  src={slide?.image}
-                  key={index}
-                  className={`${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-                />
-              ))
-            : null}
+          {featureImageList && featureImageList.length > 0 ? (
+            featureImageList.map((slide, index) => (
+              <img
+                src={slide?.image} // Đảm bảo rằng slide.image có giá trị hợp lệ
+                key={index}
+                className={`${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+                alt={`Banner ${index + 1}`} // Thêm alt cho hình ảnh
+              />
+            ))
+          ) : (
+            <p className="text-center">Không có hình ảnh nào để hiển thị.</p> // Thông báo nếu không có hình ảnh
+          )}
           <Button
             variant="outline"
             size="icon"

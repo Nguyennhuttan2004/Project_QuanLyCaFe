@@ -75,6 +75,35 @@ export const checkAuth = createAsyncThunk(
   }
 );
 
+export const getTotalUsers = createAsyncThunk(
+  "/auth/total-users",
+  async () => {
+    const response = await axios.get(
+      "http://localhost:5000/api/auth/total-users",
+      {
+        withCredentials: true,
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
+      }
+    );
+    return response.data; // This will now include admins and regularUsers
+  }
+);
+export const getTotalRevenue = createAsyncThunk(
+  "/auth/total-revenue",
+  async () => {
+    const response = await axios.get(
+      "http://localhost:5000/api/admin/orders/total-revenue",
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  }
+);
+
+
 
 const authSlice = createSlice({
   name: "auth",

@@ -7,6 +7,7 @@ const path = require('path');
 
 const avatarRouter = require('./routes/auth/avatar-route.js');
 const authRouter = require("./routes/auth/auth-route.js")
+
 const adminProductsRouter = require('./routes/admin/products-routes.js');
 const adminOrderRouter = require("./routes/admin/order-routes.js"); 
 
@@ -57,6 +58,7 @@ app.use("/api/auth", authRouter)
 
 app.use('/api/admin/products',adminProductsRouter)
 app.use("/api/admin/orders", adminOrderRouter);
+
 
 app.use("/api/shop/products", shopProductsRouter);
 app.use("/api/shop/cart", shopCartRouter);

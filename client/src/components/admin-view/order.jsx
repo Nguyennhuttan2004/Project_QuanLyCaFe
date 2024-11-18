@@ -21,6 +21,8 @@ import AdminOrderDetailsView from "./order-detail";
 
 function AdminOrdersView() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
+  const [itemsPerPage] = useState(6); // Number of items per page
   const { orderList, orderDetails } = useSelector((state) => state.adminOrder);
   const dispatch = useDispatch();
 
@@ -32,11 +34,27 @@ function AdminOrdersView() {
     dispatch(getAllOrdersForAdmin());
   }, [dispatch]);
 
-  console.log(orderDetails, "orderList");
-
   useEffect(() => {
     if (orderDetails !== null) setOpenDetailsDialog(true);
   }, [orderDetails]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(orderList.length / itemsPerPage);
+
+  // Sort orders by order date in descending order
+  const sortedOrders = [...orderList].sort(
+    (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
+  );
+
+  // Get current orders based on current page
+  const indexOfLastOrder = currentPage * itemsPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - itemsPerPage;
+  const currentOrders = sortedOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <Card>
@@ -57,18 +75,24 @@ function AdminOrdersView() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orderList && orderList.length > 0
-              ? orderList.map((orderItem) => (
-                  <TableRow>
+            {currentOrders && currentOrders.length > 0
+              ? currentOrders.map((orderItem) => (
+                  <TableRow key={orderItem?._id}>
                     <TableCell>{orderItem?._id}</TableCell>
                     <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
                     <TableCell>
-                      <Badge
+                    <Badge
                         className={`py-1 px-3 ${
                           orderItem?.orderStatus === "confirmed"
                             ? "bg-green-500"
+                            :orderItem?.orderStatus ==="delivered"
+                            ? "bg-green-600"
                             : orderItem?.orderStatus === "rejected"
                             ? "bg-red-600"
+                            : orderItem?.orderStatus === "pending" ||
+                              orderItem?.orderStatus === "inProcess" ||
+                              orderItem?.orderStatus === "inShipping"
+                            ? "bg-yellow-500" // Warning color for pending, inProcess, inShipping
                             : "bg-black"
                         }`}
                       >
@@ -99,6 +123,26 @@ function AdminOrdersView() {
               : null}
           </TableBody>
         </Table>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-4 space-x-2">
+          <Button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous
+          </Button>
+          <div className="text-center mt-2 pl-3 pr-3">
+            Page {currentPage} of {totalPages}
+          </div>
+
+          <Button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

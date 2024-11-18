@@ -31,7 +31,9 @@ function MenuItems() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleNavigate(getCurrentMenuItem) {
-    sessionStorage.removeItem("filters");
+    if (getCurrentMenuItem.id === "products") {
+      sessionStorage.removeItem("filters");
+    }
     const currentFilter =
       getCurrentMenuItem.id !== "home" &&
       getCurrentMenuItem.id !== "products" &&
@@ -54,11 +56,11 @@ function MenuItems() {
   }
 
   return (
-    <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
+    <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row ">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
           onClick={() => handleNavigate(menuItem)}
-          className="text-sm font-medium cursor-pointer"
+          className="text-md font-bold cursor-pointer text-[#d3a26f]"
           key={menuItem.id}
         >
           {menuItem.label}
@@ -87,7 +89,7 @@ function HeaderRightContent() {
   }, [dispatch]);
 
   return (
-    <div className="flex lg:items-center lg:flex-row flex-col gap-4">
+    <div className="flex lg:items-center lg:flex-row flex-col gap-4 " >
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
         <Button
           onClick={() => setOpenCartSheet(true)}
@@ -154,11 +156,11 @@ function HeaderRightContent() {
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
+    <header className="sticky top-0 z-40 w-full border-b bg-background ">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
-          <HousePlug className="h-6 w-6" />
-          <span className="font-bold">Coffee Shop</span>
+          <HousePlug className="h-6 w-6 text-[#d3a26f] " />
+          <span className="font-extrabold rounded-md text-[#d3a26f] text-xl">Coffee Shop</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>

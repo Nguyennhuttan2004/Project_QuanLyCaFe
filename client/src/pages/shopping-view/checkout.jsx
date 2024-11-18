@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { createNewOrder } from "/store/shop/order-slice";
-function ShoppingCheckout() {
+function ShoppingCheckout({onPaymentSuccess}) {
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
   const { approvalURL } = useSelector((state) => state.shopOrder);
@@ -80,9 +80,9 @@ function ShoppingCheckout() {
     };
 
     dispatch(createNewOrder(orderData)).then((data) => {
-      console.log(data, "su");
       if (data?.payload?.success) {
         setIsPaymemntStart(true);
+        onPaymentSuccess(); // Gọi hàm để cập nhật dữ liệu
       } else {
         setIsPaymemntStart(false);
       }

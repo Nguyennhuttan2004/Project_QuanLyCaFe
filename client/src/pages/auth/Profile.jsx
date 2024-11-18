@@ -3,19 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { UploadCloudIcon } from "lucide-react";
 import { Label } from "@radix-ui/react-label";
 import { setUser } from "../../../store/auth-slice";
-import axios from "axios";
 import { DOMAIN_BE, FOLDER_IMAGE_BE } from "@/lib/constant";
+import img from "./../../assets/avatarEmpty.jpg";
+
 function Profile() {
-  const { user } = useSelector((state) => state.auth); // Lấy thông tin người dùng từ Redux
-  const [avatarPreview, setAvatarPreview] = useState(user?.avatar || ""); // Xem trước ảnh
-  const [selectedFile, setSelectedFile] = useState(null); // File ảnh được chọn
+  const { user } = useSelector((state) => state.auth); // Get user info from Redux
+  const [avatarPreview, setAvatarPreview] = useState(img); // Start with default image
+  const [selectedFile, setSelectedFile] = useState(null);// Track upload status
   const dispatch = useDispatch();
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setAvatarPreview(URL.createObjectURL(file)); // Hiển thị ảnh xem trước
-      setSelectedFile(file); // Lưu file để gửi lên server
+      setAvatarPreview(URL.createObjectURL(file)); // Show preview of the selected image
+      setSelectedFile(file); // Save the file for upload
     }
   };
 
@@ -39,8 +40,12 @@ function Profile() {
         const data = await response.json();
         console.log({ data });
         alert("Avatar updated successfully!");
-        setAvatarPreview(data.avatar);
-        dispatch(setUser({ ...user, avatar: data.avatar })); // Update user in Redux
+
+        const newAvatarUrl = data.avatar; // Adjust this if necessary
+        console.log("New Avatar URL:", newAvatarUrl);
+
+        setAvatarPreview(img); // Update avatarPreview with the new avatar URL
+        dispatch(setUser({ ...user, avatar: newAvatarUrl })); 
       } else {
         const error = await response.json();
         alert("Failed to update avatar: " + error.message);
@@ -57,25 +62,25 @@ function Profile() {
         <img
           src={`${DOMAIN_BE}${FOLDER_IMAGE_BE}${user?.avatar}`}
           alt="Profile"
-          className="w-32 h-32 rounded-full border-4 border-blue-500 mb-4 object-cover"
+          className="w-32 h-32 rounded-full border-4 border-[#D2B79B] mb-4 object-cover"
         />
         <h1 className="text-2xl font-semibold">{user?.userName}</h1>
         <p className="text-gray-600">{user?.email}</p>
-        <span className="bg-blue-500 text-white text-xs font-bold py-1 px-2 rounded mt-2">
+        <span className="bg-[#D2B79B] text-white text-xs font-bold py-1 px-2 rounded mt-2">
           Role: {user?.role}
         </span>
       </div>
       <div>
         <img
-          src={avatarPreview || "/default-avatar.png"}
+          src={ avatarPreview } 
           alt="Profile"
-          className="w-32 h-32 rounded-full border-4 border-blue-500 mb-4 object-cover"
+          className="w-32 h-32 rounded-full border-4 border-[#D2B79B] mb-4 object-cover "
         />
       </div>
       <div className="mt-4 w-full mb-10">
         <Label
           htmlFor="image-upload"
-          className="flex flex-col items-center justify-center h-32 cursor-pointer border-2 border-dashed border-blue-500 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          className="flex flex-col items-center justify-center h-32 cursor-pointer border-2 border-dashed border-[#D2B79B] rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
         >
           <input
             type="file"
@@ -84,7 +89,7 @@ function Profile() {
             onChange={handleAvatarChange}
             className="hidden"
           />
-          <UploadCloudIcon className="w-10 h-10 text-blue-500 mb-2" />
+          <UploadCloudIcon className="w-10 h-10 text-[#D2B79B] mb-2" />
           <span className="text-gray-700">
             Drag & drop or click to upload image
           </span>
@@ -93,7 +98,7 @@ function Profile() {
       <div className="flex space-x-4 mt-4 w-full">
         <button
           onClick={handleUploadAvatar}
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition w-full"
+          className="bg-[#D2B79B] text-white py-2 px-4 rounded-md hover:bg-[#D2B79B] transition w-full"
         >
           Upload Avatar
         </button>

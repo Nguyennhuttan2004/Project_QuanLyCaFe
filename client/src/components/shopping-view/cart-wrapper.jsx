@@ -3,6 +3,8 @@ import { Button } from "../ui/button";
 import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./cart-items-content.jsx";
 import { ShoppingCartIcon } from "lucide-react";
+import Lottie from "lottie-react";
+import cartEmpty from "./../../assets/animations/Animation - cartEmpty.json";
 
 function UserCartWrapper({ cartItems, setOpenCartSheet }) {
   const navigate = useNavigate();
@@ -23,15 +25,22 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
   return (
     <SheetContent className="sm:max-w-md">
       <SheetHeader>
-        <div className='flex gap-2'>
-        <ShoppingCartIcon />
-        <SheetTitle >  Giỏ hàng của bạn</SheetTitle>
+        <div className="flex gap-2">
+          <ShoppingCartIcon />
+          <SheetTitle> Giỏ hàng của bạn</SheetTitle>
         </div>
       </SheetHeader>
-      <div className="mt-8 space-y-4">
-        {cartItems && cartItems.length > 0
-          ? cartItems.map((item) => <UserCartItemsContent cartItem = {item}/>)
-          : null}
+      <div className="mt-8 space-y-4 flex flex-col items-center">
+        {cartItems && cartItems.length > 0 ? (
+          cartItems.map((item) => (
+            <UserCartItemsContent key={item.id} cartItem={item} />
+          ))
+        ) : (
+          <Lottie
+            animationData={cartEmpty}
+            className="w-[40%] h-[40%] text-center"
+          />
+        )}
       </div>
       <div className="mt-8 space-y-4">
         <div className="flex justify-between">
@@ -46,7 +55,7 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
         }}
         className="w-full mt-6"
       >
-       Thanh toán
+        Thanh toán
       </Button>
     </SheetContent>
   );

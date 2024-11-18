@@ -1,0 +1,157 @@
+/* footer.css */
+footer {
+    background-color: #d3a26f; /* Màu nền mới */
+    color: #2c3e50; /* Màu chữ tối hơn để tạo sự tương phản */
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer_content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.footer_item {
+    width: 23%;
+    margin-bottom: 20px;
+}
+
+footer h4 {
+    color: #d3a26f; /* Màu tiêu đề tối hơn */
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+footer h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 30px;
+    height: 2px;
+    background-color: #2c3e50; /* Màu đường kẻ dưới */
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: #2c3e50; /* Màu chữ liên kết tối hơn */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #2c3e50; /* Màu chữ khi hover */
+}
+
+.footer_contact li {
+    display: flex;
+    align-items: center;
+}
+
+.footer_contact li svg {
+    margin-right: 10px;
+    color: #2c3e50; /* Màu icon tối hơn */
+}
+
+.newsletter_form {
+    display: flex;
+    margin-top: 15px;
+}
+
+.newsletter_form input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #bdc3c7; /* Màu viền sáng hơn */
+    border-radius: 4px 0 0 4px;
+}
+
+.newsletter_form button {
+    padding: 10px 15px;
+    background-color: #3498db; /* Màu nền nút */
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter_form button:hover {
+    background-color: #2c3e50; /* Màu nền nút khi hover */
+}
+
+.social_icons {
+    display: flex;
+    margin-top: 20px;
+}
+
+.social_icons a {
+    margin-right: 15px;
+    font-size: 20px;
+    color: #2c3e50; /* Màu icon xã hội tối hơn */
+}
+
+.footer_copyright {
+    background-color: #34495e; /* Màu nền cho copyright */
+    padding: 15px 0;
+    text-align: center;
+}
+
+#scrolltop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.back_to_top {
+    background-color:#d3a26f; /* Màu nền nút quay về đầu trang */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back_to_top:hover {
+    background-color: #2c3e50; /* Màu nền khi hover */
+    transform: translateY(-3px);
+}
+
+.back_to_top:focus {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .footer_item {
+        width: 48%;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer_item {
+        width: 100%;
+    }
+}

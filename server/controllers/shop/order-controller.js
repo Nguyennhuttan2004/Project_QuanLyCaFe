@@ -198,10 +198,22 @@ const getOrderDetails = async (req, res) => {
     });
   }
 };
+const getTotalRevenue = async (req, res) => {
+  try {
+      const totalRevenue = await Order.aggregate([
+          { $group: { _id: null, total: { $sum: "$totalAmount" } } }
+      ]);
+      res.status(200).json({ totalRevenue: totalRevenue[0]?.total || 0 });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+
 
 module.exports = {
   createOrder,
   capturePayment,
   getAllOrdersByUser,
   getOrderDetails,
+  getTotalRevenue
 };
