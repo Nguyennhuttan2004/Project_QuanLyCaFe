@@ -24,6 +24,9 @@ import ShoppingLayout from "./components/shopping-view/layout";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
+import About from "./components/shopping-view/about";
+import AdminUser from "./pages/admin-view/users";
+// import ShoppingOrders from "./components/shopping-view/orders";
 
 function App() {
   // const isAuthenticated = true;
@@ -80,6 +83,7 @@ function App() {
             <Route path="products" element={<AdminProducts />} />
             <Route path="orders" element={<AdminOders />} />
             <Route path="features" element={<AdminFeatures />} />
+            <Route path="users" element={<AdminUser/>} />
           </Route>
           <Route
             path="/shop"
@@ -96,6 +100,9 @@ function App() {
             <Route path="paypal-return" element={<PaypalReturnPage />} />
             <Route path="payment-success" element={<PaymentSuccessPage />} />
             <Route path="search" element={<SearchProducts />} />
+            <Route path="about" element={<About />} />
+            {/* <Route path="order" element={<ShoppingOrders />} /> */}
+
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="/unauth-page" element={<UnauthPage />} />

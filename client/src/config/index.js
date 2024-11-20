@@ -140,6 +140,36 @@ export const shoppingViewHeaderMenuItems = [
     },
   ];
 
+  export const shoppingViewFooterMenuItems = [
+    
+  
+    {
+      id: "bestSeller",
+      label: "Best Seller",
+      path: "/shop/listing?category=bestSeller",
+    },
+    {
+      id: "traSua",
+      label: "Trà Sữa",
+      path: "/shop/listing?category=traSua",
+    },
+    {
+      id: "caPhe",
+      label: "Cà Phê",
+      path: "/shop/listing?category=caPhe",
+    },
+    {
+      id: "daXay",
+      label: "Đá Xay",
+      path: "/shop/listing?category=daXay",
+    },
+    {
+      id: "banhNgot",
+      label: "Bánh Ngọt",
+      path: "/shop/listing?category=banhNgot",
+    },
+  ];
+
   export const filterOptions = {
     category: [
       { id: "bestSeller", label: "Best Seller" },

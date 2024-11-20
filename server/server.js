@@ -10,6 +10,7 @@ const authRouter = require("./routes/auth/auth-route.js")
 
 const adminProductsRouter = require('./routes/admin/products-routes.js');
 const adminOrderRouter = require("./routes/admin/order-routes.js"); 
+const adminUserRouter = require("./routes/admin/user-routes.js"); 
 
 const shopProductsRouter = require("./routes/shop/products-route.js");
 const shopCartRouter = require("./routes/shop/cart-routes.js");
@@ -19,6 +20,7 @@ const shopSearchRouter = require("./routes/shop/search-routes.js");
 const shopReviewRouter = require("./routes/shop/review-routes.js");
 
 const commonFeatureRouter = require("./routes/common/feature-routes.js");
+const momoPaymentRouter = require('./routes/common/momoPayment-routes.js')
 
 mongoose
   .connect(
@@ -58,6 +60,7 @@ app.use("/api/auth", authRouter)
 
 app.use('/api/admin/products',adminProductsRouter)
 app.use("/api/admin/orders", adminOrderRouter);
+app.use("/api/admin/users", adminUserRouter);
 
 
 app.use("/api/shop/products", shopProductsRouter);
@@ -68,5 +71,6 @@ app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
+app.use('/api/common/payment', momoPaymentRouter);
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

@@ -19,7 +19,7 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { addToCart, fetchCartItems } from "/store/shop/cart-slice";
 import { useToast } from "@/hooks/use-toast";
 import ReactPaginate from "react-paginate"; // Import thư viện phân trang
-import './../../css/pagination.css';
+import "./../../css/pagination.css";
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];
@@ -36,13 +36,15 @@ function createSearchParamsHelper(filterParams) {
 
 function ShoppingListing() {
   const dispatch = useDispatch();
-  const { productList, productDetails } = useSelector((state) => state.shopProducts);
+  const { productList, productDetails } = useSelector(
+    (state) => state.shopProducts
+  );
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
-  const { user } = useSelector(state => state.auth);
-  const { cartItems } = useSelector(state => state.shopCart);
+  const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.shopCart);
   const { toast } = useToast();
 
   const categorySearchParam = searchParams.get("category");
@@ -74,7 +76,8 @@ function ShoppingListing() {
         [getSectionId]: [getCurrentOption],
       };
     } else {
-      const indexOfCurrentOption = cpyFilters[getSectionId].indexOf(getCurrentOption);
+      const indexOfCurrentOption =
+        cpyFilters[getSectionId].indexOf(getCurrentOption);
       if (indexOfCurrentOption === -1) {
         cpyFilters[getSectionId].push(getCurrentOption);
       } else {
@@ -154,9 +157,9 @@ function ShoppingListing() {
       <Productfilter filters={filters} handleFilter={handleFilter} />
       <div className="bg-background w-full rounded-lg shadow-sm">
         <div className="p-4 border-b flex items-center justify-between">
-          <h2 className="text-lg font-extrabold">Tất cả sản phẩm</h2>
+          <h2 className="text-xl font-extrabold text-[#A67C6D]">Tất cả sản phẩm</h2>
           <div className="flex items-center gap-3">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground text-[#A67C6D]">
               {productList?.length} Sản phẩm
             </span>
             <DropdownMenu>
@@ -166,8 +169,8 @@ function ShoppingListing() {
                   size="sm"
                   className="flex items-center gap-1"
                 >
-                  <ArrowUpDownIcon className="h-4 w-4" />
-                  <span>Sắp xếp</span>
+                  <ArrowUpDownIcon className="h-4 w-4 text-[#A67C6D]" />
+                  <span className="text-[#A67C6D]">Sắp xếp</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[200px]">
@@ -185,20 +188,23 @@ function ShoppingListing() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-          {displayedProducts && displayedProducts.length > 0
-            ? displayedProducts.map((productItem) => (
-                <ShoppingProductTile
-                  handleGetProductDetails={handleGetProductDetails}
-                  key={productItem.id}
-                  product={productItem}
-                  handleAddtoCart={handleAddtoCart}
-                  
-                />
-              ))
-            : <p className="text-center">Không có sản phẩm nào.</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+          {displayedProducts && displayedProducts.length > 0 ? (
+            displayedProducts.map((productItem) => (
+              <ShoppingProductTile
+                handleGetProductDetails={handleGetProductDetails}
+                key={productItem.id}
+                product={productItem}
+                handleAddtoCart={handleAddtoCart}
+                className="flex flex-col justify-between" 
+              />
+            ))
+          ) : (
+            <p className="text-center">Không có sản phẩm nào.</p>
+          )}
         </div>
         {/* Phân trang */}
+        <div className="flex justify-center items-center mt-4 mr-40">
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
@@ -217,9 +223,14 @@ function ShoppingListing() {
           nextClassName={"page-item"}
           nextLinkClassName={"page-link"}
         />
+        </div>
       </div>
 
-      <ProductDetailsDialog    open={openDetailsDialog} setOpen={setOpenDetailsDialog} productDetails={productDetails} />
+      <ProductDetailsDialog
+        open={openDetailsDialog}
+        setOpen={setOpenDetailsDialog}
+        productDetails={productDetails}
+      />
     </div>
   );
 }

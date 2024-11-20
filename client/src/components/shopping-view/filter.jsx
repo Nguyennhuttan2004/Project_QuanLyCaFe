@@ -7,18 +7,18 @@ import { Separator } from "../ui/separator";
 function ProductFilter({ filters, handleFilter }) {
   return (
     <div className="bg-background rounded-lg shadow-sm">
-      <div className="p-4 border-b">
-        <h2 className="text-lg font-extrabold">Bộ lọc</h2>
+      <div className="p-5 border-b">
+        <h2 className="text-xl font-extrabold text-[#A67C6D]">Bộ lọc</h2>
       </div>
       <div className="p-4 space-y-4">
         {Object.keys(filterOptions).map((keyItem) => (
           <Fragment key={keyItem}>
             <div>
-              <h3 className="text-base font-bold">{keyItem}</h3>
-              <div className="grid gap-2 mt-2">
+              <h3 className="text-xl font-bold text-[#A67C6D]">{keyItem}</h3>
+              <div className="grid gap-4 mt-6">
                 {filterOptions[keyItem].map((option) => (
                   <Label
-                    className="flex font-medium items-center gap-2"
+                    className="flex font-medium items-center gap-2 text-base"
                     key={option.id}
                   >
                     {" "}

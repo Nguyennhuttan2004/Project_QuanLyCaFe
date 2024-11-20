@@ -1,0 +1,69 @@
+.home {
+  min-height: 60vh;
+  padding-top: 5rem;
+  background: url("../assets/image/home-bg.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.home .row {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center items horizontally */
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.home .row .content {
+  flex: 1 1 30rem;
+  text-align: center; /* Center text */
+}
+
+.home .row .image {
+  flex: 1 1 30rem;
+  padding-top: 2rem;
+  text-align: center;
+  padding-left: 15rem;
+}
+
+.home .row .image img {
+  height: auto;
+  max-height: 20rem;
+  animation: float 4s linear infinite;
+}
+
+.home .row .content h3 {
+  font-size: 3.5rem; /* Increase font size for better visibility */
+  color: #443; /* Use a darker shade for better contrast */
+  text-transform: uppercase; /* Make text uppercase for emphasis */
+  margin-bottom: 1.5rem; /* Adjust bottom margin */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+  letter-spacing: 1px; /* Add some letter spacing for readability */
+  line-height: 1.2; /* Adjust line height for better spacing */
+}
+
+.home .image-slider {
+  display: flex; /* Use flexbox for horizontal layout */
+  justify-content: center; /* Center items */
+  padding: 1rem 0;
+}
+
+.home .image-slider img {
+  height: 5rem;
+  margin: 0 .5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.home .image-slider img:hover {
+  transform: translateY(-1rem);
+}
+
+@keyframes float{
+  0%,100%{
+    transform: translateY(0rem);
+  }
+  50%{
+    transform: translateY(-7rem);
+  }
+}

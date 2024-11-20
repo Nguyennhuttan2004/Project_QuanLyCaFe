@@ -18,11 +18,16 @@ module.exports = {
 	  },
 	  extend: {
 		colors: {
+		 'custom-gray': 'rgba(158, 141, 141, 0.356)',
 		  border: "hsl(var(--border))",
 		  input: "hsl(var(--input))",
 		  ring: "hsl(var(--ring))",
 		  background: "hsl(var(--background))",
 		  foreground: "hsl(var(--foreground))",
+		  backgroundImage: {
+			'menu': "url('./src/assets/image/menu-bg.jpg')"
+
+		  },
 		  primary: {
 			DEFAULT: "hsl(var(--primary))",
 			foreground: "hsl(var(--primary-foreground))",

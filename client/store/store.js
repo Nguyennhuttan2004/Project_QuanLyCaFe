@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth-slice"
+
 import adminProductSlice from "./admin/products-slice/index.js"
 import adminOrderSlice from "./admin/order-slice/index.js"
+import adminUserSlice from "./admin/user-slice/index.js"
 
 
 import shopProductSlice from "./shop/products-slice/index.js"
@@ -18,6 +20,7 @@ const store = configureStore({
     auth: authReducer,
     adminProducts : adminProductSlice,
     adminOrder: adminOrderSlice,
+    adminUser:adminUserSlice,
 
     shopProducts: shopProductSlice,
     shopCart: shopCartSlice,

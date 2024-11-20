@@ -34,6 +34,12 @@ import {
       path: "/admin/features",
       icon: <BookHeart />
     },
+    {
+      id: "users",
+      label: "User",
+      path: "/admin/users",
+      icon: <BookHeart />
+    },
 
   ];
   

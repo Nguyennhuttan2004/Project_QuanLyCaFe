@@ -1,34 +1,33 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
     id: {
-        type: String, 
+        type: String,
         required: true,
         unique: true,
     },
-    userName : {
+    userName: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
     },
-    email : {
+    email: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
-    }, 
-    password : {
+    },
+    password: {
         type: String,
-        require: true,
+        required: true,
     },
     role: {
         type: String,
         default: 'user'
     },
-    avatar: { // Thêm trường avatar
+    avatar: {
         type: String,
-        default: null // Hoặc có thể để trống nếu không có giá trị mặc định
+        default: null
     }
+});
 
-  
-})
 module.exports = mongoose.model("User", UserSchema);

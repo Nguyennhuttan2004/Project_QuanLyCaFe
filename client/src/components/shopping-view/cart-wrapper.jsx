@@ -30,15 +30,15 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
           <SheetTitle> Giỏ hàng của bạn</SheetTitle>
         </div>
       </SheetHeader>
-      <div className="mt-8 space-y-4 flex flex-col items-center">
+      <div className="mt-8 space-y-4 flex flex-col">
         {cartItems && cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <UserCartItemsContent key={item.id} cartItem={item} />
+            <UserCartItemsContent key={item.id} cartItem={item} className="" />
           ))
         ) : (
           <Lottie
             animationData={cartEmpty}
-            className="w-[40%] h-[40%] text-center"
+            className="w-[40%] h-[40%] ml-32"
           />
         )}
       </div>

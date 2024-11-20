@@ -146,12 +146,12 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           </div>
           <div className="mt-5 mb-5">
             {productDetails?.totalStock === 0 ? (
-              <Button className="w-full opacity-60 cursor-not-allowed">
+              <Button className="btnOOS w-full opacity-60 cursor-not-allowed">
                Hết hàng
               </Button>
             ) : (
               <Button
-                className="w-full"
+                className="btn w-full"
                 onClick={() =>
                   handleAddtoCart(
                     productDetails?._id,
@@ -207,6 +207,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                 placeholder="Hãy viết đánh giá của bạn cho sản phẩm ..."
               />
               <Button
+                className="btn"
                 onClick={handleAddReview}
                 disabled={reviewMsg.trim() === ""}
               >

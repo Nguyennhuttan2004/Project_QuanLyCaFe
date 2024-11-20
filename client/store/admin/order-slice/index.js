@@ -32,24 +32,26 @@ export const getOrderDetailsForAdmin = createAsyncThunk(
 
 export const updateOrderStatus = createAsyncThunk(
   "/order/updateOrderStatus",
-  async ({ id, orderStatus }) => {
+  async ({ id, orderStatus }, { dispatch }) => {
     const response = await axios.put(
       `http://localhost:5000/api/admin/orders/update/${id}`,
-      {
-        orderStatus,
-      }
+      { orderStatus }
     );
 
-    return response.data;
+    // Gọi lại các API để cập nhật lại dữ liệu
+    dispatch(getTotalOrders()); // Lấy lại tổng số đơn hàng
+    dispatch(getSalesPerMonth()); // Lấy lại doanh thu theo tháng
+    
+    return response.data; // Trả lại kết quả sau khi cập nhật trạng thái đơn hàng
   }
 );
 export const getSalesPerMonth = createAsyncThunk(
   "/order/getSalesPerMonth",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get( `http://localhost:5000/api/admin/orders/sales-per-month`);
-      console.log("Redux fetch sales data:", response.data); // Debug dữ liệu từ API
-      return response.data;
+      const response = await axios.get(`http://localhost:5000/api/admin/orders/sales-per-month`);
+      console.log("Redux fetch sales data:", response.data); // Debug API data
+      return response.data; // Đảm bảo trả về đúng cấu trúc
     } catch (error) {
       console.error("Error in getSalesPerMonth:", error);
       return rejectWithValue(error.response.data);
@@ -66,6 +68,8 @@ export const getTotalOrders = createAsyncThunk(
     return response.data;
   }
 );
+
+
 const adminOrderSlice = createSlice({
   name: "adminOrderSlice",
   initialState,

@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
   
   }
   
@@ -7,12 +8,39 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    background: red;
   }
   
-  footer {
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7;
+  .btn {
+    padding: 20px 35px;
+    font-size: 15px;
+    font-weight: 500;
+    background-image: linear-gradient(to right, #A67C6D 0, #D8CFC4 51%, #A67C6D 100%);
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    background-size: 200%;
+    transition: all 0.5s;
+  }
+  .btn:hover {
+    background-position: right center;
+  }
+
+    
+  .btnOOS {
+    padding: 20px 35px;
+    font-size: 15px;
+    font-weight: 500;
+    background-image: linear-gradient(to right, #A67C6D 0, #D8CFC4 20%, #A67C6D 100%);
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    background-size: 200%;
+    transition: all 0.5s;
+  }
+  .btnOOS:hover {
+    background-position: right center;
   }

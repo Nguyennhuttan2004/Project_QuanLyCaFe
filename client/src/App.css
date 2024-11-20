@@ -1,42 +1,80 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: auto; /* Set a maximum width for the root */
+  margin: 0 auto; /* Center the root */
+  padding: 0 auto; /* Add some padding */
+  font-family: 'Poppins', sans-serif;
+  --border: 0.2rem solid #443; 
+  
 }
 
+
+/* Logo Styles */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  height: 6em; /* Set height for the logo */
+  padding: 1.5em; /* Padding around the logo */
+  will-change: filter; /* Optimize for performance */
+  transition: filter 300ms; /* Smooth transition for filter */
 }
 
+.logo:hover {
+  filter: drop-shadow(0 0 2em rgba(100, 108, 255, 0.67)); /* Use rgba for better control */
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em rgba(97, 218, 251, 0.67)); /* Use rgba for better control */
+}
+
+/* Animation */
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* Start rotation */
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* End rotation */
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite 20s linear; /* Spin animation */
   }
 }
 
+/* Card Styles */
 .card {
-  padding: 2em;
+  padding: 2em; /* Padding for cards */
+  background-color: #fff; /* Background color for cards */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+/* Read the Docs Link */
 .read-the-docs {
-  color: #888;
+  color: #888; /* Color for the link */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth color transition */
 }
+
+.read-the-docs:hover {
+  color: #646cff; /* Change color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  #root {
+    padding: 0 10px; /* Reduce padding on smaller screens */
+  }
+
+  .logo {
+    height: 4em; /* Adjust logo size for smaller screens */
+  }
+
+  .card {
+    padding: 1.5em; /* Adjust card padding for smaller screens */
+  }
+}
+
+

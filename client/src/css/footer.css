@@ -1,157 +1,239 @@
-/* footer.css */
+/* footer */
 footer {
-    background-color: #d3a26f; /* Màu nền mới */
-    color: #2c3e50; /* Màu chữ tối hơn để tạo sự tương phản */
-    padding: 50px 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.footer_content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
-
-.footer_item {
-    width: 23%;
-    margin-bottom: 20px;
-}
-
-footer h4 {
-    color: #d3a26f; /* Màu tiêu đề tối hơn */
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
+    background-image: url('../assets/bg4.png');
+    display: block;
+    height: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #D8CFC4; /* Light coffee color */
+    color: #333333; /* Dark gray text color */
+    font-size: 15px;
     position: relative;
-}
-
-footer h4::after {
-    content: '';
+    margin-top: 50px; 
+  }
+  
+  footer::before {
+    content: "";
+    background-image: url('../../src/assets/pattern2.png');
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: contain;
     position: absolute;
+    top: 0;
     left: 0;
-    bottom: -10px;
-    width: 30px;
-    height: 2px;
-    background-color: #2c3e50; /* Màu đường kẻ dưới */
-}
-
-footer ul {
-    list-style: none;
-    padding: 0;
-}
-
-footer ul li {
-    margin-bottom: 10px;
-}
-
-footer a {
-    color: #2c3e50; /* Màu chữ liên kết tối hơn */
+    width: 100%;
+    height: 100%;
+  }
+  
+  .footer_top {
+    padding: 50px 60px;
+    background-color: #FFFFFF; /* White background for the top section */
+    border-radius: 10px;
+    box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.1);
+    background-image: url('../../src/assets/pattern3.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+    display: flex;
+  }
+  
+  .footer_text {
+    width: 50%;
+  }
+  
+  .footer_text h2 {
+    font-size: 28px;
+    color: #A67C6D; /* Dark coffee color for headings */
+  }
+  
+  .footer_form {
+    width: 50%;
+  }
+  
+  .footer_form form {
+    display: flex;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer_form input {
+    padding: 20px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #888;
+    background: #FFFFFF; /* White background for input */
+    flex: 1 1 auto;
+    border-radius: 0.5rem 0 0 0.5rem;
+    border: 1px solid #A67C6D; /* Dark coffee color for border */
+    outline: none;
+    transition: all 0.5s;
+  }
+  
+  .footer_form button {
+    padding: 20px 35px;
+    font-size: 20px;
+    background-image: linear-gradient(
+      to right,
+      #A67C6D 0,
+      #D8CFC4 51%,
+      #A67C6D 100%
+    ); /* Gradient using coffee colors */
+    background-size: 200%;
+    border-color: transparent;
+    transition: all 0.5s;
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .footer_bottom {
+    display: flex;
+    padding: 70px 0;
+    position: relative;
+  }
+  
+  /* item1 */
+  .footer_item {
+    width: 25%;
+  }
+  
+  .footer_item a {
+    color: #636363; /* Updated link color */
+    font-size: 16px;
+    transition: all 0.5s;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    color: #2c3e50; /* Màu chữ khi hover */
-}
-
-.footer_contact li {
+  }
+  
+  .footer_item li {
+    padding: 0.5rem 0;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  
+  .footer_contact li {
+    padding: 8px 0;
     display: flex;
     align-items: center;
-}
-
-.footer_contact li svg {
+  }
+  
+  .footer_contact i {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
     margin-right: 10px;
-    color: #2c3e50; /* Màu icon tối hơn */
-}
-
-.newsletter_form {
-    display: flex;
-    margin-top: 15px;
-}
-
-.newsletter_form input {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #bdc3c7; /* Màu viền sáng hơn */
-    border-radius: 4px 0 0 4px;
-}
-
-.newsletter_form button {
-    padding: 10px 15px;
-    background-color: #3498db; /* Màu nền nút */
-    color: white;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.newsletter_form button:hover {
-    background-color: #2c3e50; /* Màu nền nút khi hover */
-}
-
-.social_icons {
-    display: flex;
-    margin-top: 20px;
-}
-
-.social_icons a {
-    margin-right: 15px;
-    font-size: 20px;
-    color: #2c3e50; /* Màu icon xã hội tối hơn */
-}
-
-.footer_copyright {
-    background-color: #34495e; /* Màu nền cho copyright */
-    padding: 15px 0;
     text-align: center;
-}
-
-#scrolltop {
+    background: linear-gradient(to right, #A67C6D 0, #D8CFC4 51%, #A67C6D 100%); /* Updated icon background */
+    display: block;
+    border-radius: 50px;
+  }
+  
+  /* item2 */
+  .footer_item h3 {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    color: #A67C6D; /* Dark coffee color for headings */
+  }
+  
+  .footer_item h3::before,
+  .footer_item h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    border-radius: 20px;
+    background: linear-gradient(to right, #A67C6D 0, #D8CFC4 51%, #A67C6D 100%); 
+    background-size: 200%;
+  }
+  
+  .footer_item h3::before {
+    width: 15px;
+  }
+  
+  .footer_item h3::after {
+    width: 45px;
+    left: 20px;
+  }
+  
+  .footer_item i {
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  
+  .footer_item ul {
+    list-style: none;
+  }
+  
+  .footer_copyright {
+    background-color: #1f343b; /* Keep this color or update as needed */
+    padding: 10px 0;
+    position: relative;
+  }
+  
+  .footer_content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footer_left span {
+    color: #A67C6D; /* Dark coffee color */
+  }
+  
+  .footer_right a {
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50px;
+    font-size: 14px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.5s;
+  }
+  
+  .back_to_top {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 8px;
+    background: #A67C6D; /* Dark coffee color for button */
+    font-weight: bold;
+    color: #fff;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 1000;
-}
-
-.back_to_top {
-    background-color:#d3a26f; /* Màu nền nút quay về đầu trang */
-    color: white;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
     font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.back_to_top:hover {
-    background-color: #2c3e50; /* Màu nền khi hover */
-    transform: translateY(-3px);
-}
-
-.back_to_top:focus {
-    outline: none;
-}
-
-@media (max-width: 768px) {
-    .footer_item {
-        width: 48%;
+    transition: all 0.5s;
+    box-shadow: -4px 4px 24px -10px #A67C6D; /* Updated shadow color */
+  }
+  
+  /* Keyframes remain unchanged */
+  @keyframes move2 {
+    0% {
+      transform: rotate(1deg) translate(2px, 2px);
     }
-}
-
-@media (max-width: 576px) {
-    .footer_item {
-        width: 100%;
+    50% {
+      transform: rotate(-1deg) translate(-2px, -2px);
     }
-}
+    100% {
+      transform: rotate(1deg) translate(2px, 2px);
+    }
+  }
+  
+  @keyframes upToDown {
+    49% {
+      transform: translateY(100%);
+    }
+    50% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    51% {
+      opacity: 1;
+    }
+  }

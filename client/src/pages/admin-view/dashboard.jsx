@@ -6,20 +6,19 @@ import { CircleDollarSign, ShoppingBag, UserRound } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { getTotalUsers } from "/store/auth-slice";
 import { getTotalRevenue } from "/store/auth-slice";
-import { getSalesPerMonth } from "/store/admin/order-slice";
+import { getSalesPerMonth } from "./../../../store/admin/order-slice/index.js";
 import { getTotalOrders } from "/store/admin/order-slice";
 
 function AdminDashboard() {
-  const [totalUsers, setTotalUsers] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [salesData, setSalesData] = useState([]);
   const [adminCount, setAdminCount] = useState(0); // State for admin count
-  const [userCount, setUserCount] = useState(0); 
+  const [userCount, setUserCount] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, [dispatch]);
 
   const fetchTotalUsers = async () => {
@@ -62,21 +61,21 @@ function AdminDashboard() {
     }
   };
 
-const fetchSalesPerMonth = async () => {
-  try {
-    const response = await dispatch(getSalesPerMonth());
-    if (response.payload) {
-      setSalesData(response.payload.data);
-      console.log("Sales data updated:", response.payload.data); // Log để kiểm tra
-    } else {
-      throw new Error("No data received");
+  const fetchSalesPerMonth = async () => {
+    try {
+      const response = await dispatch(getSalesPerMonth());
+      if (response.payload) {
+        console.log("Sales data response:", response.payload); // Log the response
+        setSalesData(response.payload.data); // Cập nhật dữ liệu doanh thu tháng mới
+        console.log("Updated sales data:", response.payload.data); // Log updated sales data
+      } else {
+        throw new Error("No data received");
+      }
+    } catch (error) {
+      console.error("Error fetching sales data:", error);
     }
-  } catch (error) {
-    console.error("Error fetching sales data:", error);
-  }
-};
-
-
+  };
+  
   const fetchData = async () => {
     await fetchTotalUsers();
     await fetchTotalOrders();
@@ -86,16 +85,18 @@ const fetchSalesPerMonth = async () => {
 
   const handlePaymentSuccess = async () => {
     await fetchTotalRevenue();
-    await fetchSalesPerMonth(); // Đảm bảo gọi hàm này
+    await fetchTotalOrders(); // Gọi lại API để lấy tổng số đơn hàng mới
+    await fetchSalesPerMonth(); // Gọi lại API để lấy doanh thu mới
   };
-
+  
 
   useEffect(() => {
-    if (salesData) {
+    if (salesData.length > 0) {
       console.log("Sales data updated:", salesData); // Debug
     }
-  }, [salesData]);
+  }, [salesData]); // Khi salesData thay đổi, cập nhật lại biểu đồ
   
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
@@ -148,7 +149,10 @@ const fetchSalesPerMonth = async () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4">
-        <SalesChart data={salesData} onPaymentSuccess={handlePaymentSuccess} />
+          <SalesChart
+            data={salesData}
+            onPaymentSuccess={handlePaymentSuccess}
+          />
         </CardContent>
       </Card>
     </div>

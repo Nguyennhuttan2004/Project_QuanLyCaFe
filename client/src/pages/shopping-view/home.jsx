@@ -23,6 +23,7 @@ import "./../../css/video.css";
 import videoSource from "./../../assets/coffeeshop.mp4";
 import imageVideo from "./../../assets/videoimage.jpg";
 import { getFeatureImages } from "/store/common/common-slice";
+import About from "@/components/shopping-view/about";
 
 const categories = [
   { id: "bestSeller", label: "Best Seller", icon: LucideCoffee },
@@ -65,9 +66,9 @@ function ShoppingHome() {
 
   useEffect(() => {
     dispatch(getFeatureImages()).then((response) => {
-        console.log("Feature Image List Response:", response);
+      console.log("Feature Image List Response:", response);
     });
-}, [dispatch]);
+  }, [dispatch]);
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
@@ -127,7 +128,8 @@ function ShoppingHome() {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <div className="relative w-full h-[600px] overflow-hidden">
+      <div className="p-10">
+      <div className=" relative w-full h-[600px] overflow-hidden ">
           {featureImageList && featureImageList.length > 0 ? (
             featureImageList.map((slide, index) => (
               <img
@@ -169,11 +171,15 @@ function ShoppingHome() {
             <ChevronRightIcon className="w-4 h-4" />
           </Button>
         </div>
+      </div>
 
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">
-              Mua sắm theo danh mục
+            <h2 className="text-9xl uppercase text-custom-gray text-center relative mb-10">
+              Danh mục
+              <span className="absolute italic top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-3xl text-[#A67C6D] font-bold">
+                Sản phẩm
+              </span>
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {categories.map((categoryItem) => (
@@ -192,22 +198,26 @@ function ShoppingHome() {
             </div>
           </div>
         </section>
-
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">
-              Sản phẩm đặc trưng
+            <h2 className="text-9xl uppercase text-custom-gray text-center relative mb-10">
+              Sản phẩm
+              <span className="absolute italic top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-3xl text-[#A67C6D] font-bold">
+                Best seller
+              </span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {productList && productList.length > 0 ? (
                 productList.map((productItem) => {
                   return productItem.category === "bestSeller" ? (
-                    <ShoppingProductTile
-                      key={productItem.id}
-                      handleGetProductDetails={handleGetProductDetails}
-                      product={productItem}
-                      handleAddtoCart={handleAddtoCart}
-                    />
+                    <div className="border-2 border-brown-600 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                      <ShoppingProductTile
+                        key={productItem.id}
+                        handleGetProductDetails={handleGetProductDetails}
+                        product={productItem}
+                        handleAddtoCart={handleAddtoCart}
+                      />
+                    </div>
                   ) : null;
                 })
               ) : (
@@ -244,6 +254,10 @@ function ShoppingHome() {
               />
             </div>
           </div>
+        </section>
+
+        <section className="">
+          <About />
         </section>
 
         <ProductDetailsDialog
