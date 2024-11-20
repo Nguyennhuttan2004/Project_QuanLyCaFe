@@ -60,17 +60,26 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// Xóa người dùng
 exports.deleteUser = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        if (user == null) {
-            return res.status(404).json({ message: 'Cannot find user' });
-        }
-
-        await user.remove();
-        res.json({ message: 'Deleted User' });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+        const { id } = req.params;
+        const user = await User.findByIdAndDelete(id);
+    
+        if (!user)
+          return res.status(404).json({
+            success: false,
+            message: "User not found",
+          });
+    
+        res.status(200).json({
+          success: true,
+          message: "User delete successfully",
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).json({
+          success: false,
+          message: "Error occured",
+        });
+      }
 };

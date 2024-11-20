@@ -32,7 +32,7 @@ function Users() {
     }, [dispatch]);
 
     const handleDelete = async (id) => {
-        if (window.confirm("Are you sure you want to delete this user?")) {
+        if (window.confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
             dispatch(setStatus('loading'));
             try {
                 await axios.delete(`http://localhost:5000/api/admin/users/${id}`, {
@@ -41,7 +41,7 @@ function Users() {
                     }
                 });
                 // Cập nhật lại danh sách người dùng
-                dispatch(setUsers(users.filter(user => user.id !== id)));
+                dispatch(setUsers(users.filter(user => user._id !== id))); // Sử dụng user.id
                 dispatch(setStatus('succeeded'));
             } catch (err) {
                 dispatch(setError(err.message));
@@ -69,8 +69,8 @@ function Users() {
                 </thead>
                 <tbody>
                     {users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
+                        <tr key={user._id}>
+                            <td>{user._id}</td>
                             <td>{user.userName}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
