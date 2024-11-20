@@ -1,37 +1,43 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose"); 
 const User = require("../../models/User");
 
 // register
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
 
-  try {
-    const checkUser = await User.findOne({ email });
-    if (checkUser)
-      return res.json({
-        success: false,
-        message: "email đã tồn tại",
-      });
+  // Kiểm tra xem tất cả các trường có được cung cấp không
+  if (!userName || !email || !password) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
 
-    const hashPassword = await bcrypt.hash(password, 12);
+  try {
+    // Kiểm tra xem email đã tồn tại chưa
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email đã tồn tại" });
+    }
+
+    // Mã hóa mật khẩu
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Tạo người dùng mới
     const newUser = new User({
+      id: new mongoose.Types.ObjectId().toString(), // Tạo ID mới
       userName,
       email,
-      password: hashPassword,
+      password: hashedPassword,
+      role: 'user', // Giá trị mặc định
+      avatar: null  // Giá trị mặc định
     });
 
+    // Lưu người dùng vào cơ sở dữ liệu
     await newUser.save();
-    res.status(200).json({
-      success: true,
-      message: "Đăng ký thành công",
-    });
+    res.status(201).json({ message: "Đăng ký thành công" });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      success: false,
-      message: "xảy ra một số lỗi",
-    });
+    console.error("Error saving user:", error);
+    res.status(500).json({ message: "Xảy ra lỗi trong quá trình đăng ký" });
   }
 };
 

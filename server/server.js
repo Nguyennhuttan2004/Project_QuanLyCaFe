@@ -24,8 +24,12 @@ const momoPaymentRouter = require('./routes/common/momoPayment-routes.js')
 
 mongoose
   .connect(
-    "mongodb+srv://nhuttan288204:nhuttan288204@cluster0.5tgg4.mongodb.net/"
+    "mongodb+srv://nhuttan288204:nhuttan288204@cluster0.5tgg4.mongodb.net/",{
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
   )
+  
   .then(() => console.log("MongoDB connected"))
   .catch((erorr) => console.log(erorr));
 
@@ -53,8 +57,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("."))
 
-app.use('/api', avatarRouter)
 
+app.use('/api', avatarRouter)
 app.use("/api/auth", authRouter)
 // app.use('/api/auth', avatarRouter); 
 

@@ -1,7 +1,6 @@
 import Address from "@/components/shopping-view/address";
 import UserCartItemsContent from "@/components/shopping-view/cart-items-content";
 import { Button } from "@/components/ui/button";
-import img from "../../assets/banner-1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";

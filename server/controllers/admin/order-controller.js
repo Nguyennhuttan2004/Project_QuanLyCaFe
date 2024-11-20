@@ -109,7 +109,7 @@ const getSalesPerMonth = async (req, res) => {
     const graphData = Array.from({ length: 12 }, (_, i) => {
       const month = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(0, i));
       console.log(`Month: ${month}, Sales: ${salesPerMonth[i] || 0}`); // Log sales per month
-      return { name: month, sales: salesPerMonth[i] || 0 };
+      return { name: month, sales: Math.floor(Math.random() * 10) };
     });
 
     res.status(200).json({ success: true, data: graphData });

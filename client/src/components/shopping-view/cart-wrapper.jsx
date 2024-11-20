@@ -45,7 +45,7 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       <div className="mt-8 space-y-4">
         <div className="flex justify-between">
           <span className="font-bold">Tổng cộng: </span>
-          <span className="font-bold">${totalCartAmount}</span>
+          <span className="font-bold">{totalCartAmount}Đ</span>
         </div>
       </div>
       <Button

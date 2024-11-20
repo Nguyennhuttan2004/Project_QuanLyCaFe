@@ -1,16 +1,17 @@
 const express = require("express");
 const upload = require("../../helpers/upload-avatar.multer"); 
 const path = require("path"); 
+const authController = require('../../controllers/auth/auth-controller');
 const {
-  registerUser,
   loginUser,
   logoutUser,
   authMiddleware,
-  getTotalUsers
+  getTotalUsers,
+  registerUser
 } = require("../../controllers/auth/auth-controller");
 
 const router = express.Router();
-router.post("/register", registerUser);
+router.post('/register', authController.registerUser); 
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/check-auth", authMiddleware, (req, res) => {

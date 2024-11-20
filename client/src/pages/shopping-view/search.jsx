@@ -104,7 +104,7 @@ function SearchProducts() {
       </div>
       {!searchResults.length ? (
         <>
-        <Lottie animationData={Search} className="w-1/2 h-auto  ms-72 mt-20" /> 
+        <Lottie animationData={Search} className="w-1/2 h-auto  ms-80 mt-20" /> 
       </>
       ) : null}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">

@@ -11,20 +11,17 @@ import {
   GithubIcon,
   HousePlug,
   InstagramIcon,
-
   Mail,
   MapPin,
   MoveRight,
-
   PhoneIcon,
   Send,
-
   Upload,
   YoutubeIcon,
 } from "lucide-react";
 import {
   shoppingViewFooterMenuItems,
-
+  shoppingViewFooterService,
 } from "@/config";
 import { Label } from "../ui/label";
 
@@ -47,7 +44,7 @@ const Footer = () => {
   };
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -88,7 +85,6 @@ const Footer = () => {
     return (
       <nav className="mb-3 lg:mb-0 lg:items-start gap-2 flex flex-col lg:flex-col">
         {" "}
-        {/* Changed to flex-col */}
         {shoppingViewFooterMenuItems.map((menuItem) => (
           <Label
             onClick={() => handleNavigate(menuItem)}
@@ -114,7 +110,8 @@ const Footer = () => {
             <form action>
               <input type="text" name id placeholder="Your Email Address" />
               <button>
-                <i/><Send />
+                <i />
+                <Send />
               </button>
             </form>
           </div>
@@ -122,7 +119,11 @@ const Footer = () => {
         <div className="footer_bottom">
           <div className="footer_item wow animate__animated animate__fadeInUp animate__delay-1s">
             <div>
-              <Link to="/shop/home" className="flex gap-2 mb-8" onClick={handleScrollToTop}>
+              <Link
+                to="/shop/home"
+                className="flex gap-2 mb-8"
+                onClick={handleScrollToTop}
+              >
                 <HousePlug className="h-10 w-10 text-[#BFA598] text-xl" />{" "}
                 <span className="font-extrabold rounded-md text-[#A67C6D] text-4xl">
                   Coffee Shop
@@ -162,40 +163,26 @@ const Footer = () => {
               </i>
             </ul>
           </div>
-          <div className="footer_item wow animate__animated animate__fadeInUp animate__delay-1s">
+          <div className=" footer_item wow animate__animated animate__fadeInUp animate__delay-1s">
             <h3>Our Services</h3>
-            <ul>
-              <li>
-                <a href="#" className="flex items-center">
-                  {" "}
-                  <i className="mr-2">
-                    {" "}
+            <ul className="">
+              <li className="">
+                <a
+                  href="/shop/about"
+                  className=" flex items-center service"
+                >
+                  <i className="mr-2 ">
                     <MoveRight />
                   </i>
-                  Web Development
+                  About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center">
-                  {" "}
-                  <i className="mr-2">
-                    {" "}
-                    {/* Added margin to the right for spacing */}
+                <a href="/contact" className="flex items-center  service">
+                  <i className="mr-2 ">
                     <MoveRight />
                   </i>
-                  Web Development
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center">
-                  {" "}
-                  {/* Added flex and items-center classes */}
-                  <i className="mr-2">
-                    {" "}
-                    {/* Added margin to the right for spacing */}
-                    <MoveRight />
-                  </i>
-                  Web Development
+                  Contact
                 </a>
               </li>
             </ul>
@@ -236,7 +223,10 @@ const Footer = () => {
           <div className=" text-center py-4">
             <p className="text-gray-400">
               Copyright © 2024
-              <span className="font-bold text-[#A67C6D] m-2">Coffee Shop</span> Design by Nhựt Tân .
+              <span className="font-bold text-[#A67C6D] m-2">
+                Coffee Shop
+              </span>{" "}
+              Design by Nhựt Tân .
             </p>
             <p className="text-sm text-gray-400 italic mt-2">
               "Điểm đến lý tưởng cho những trải nghiệm cà phê đặc biệt!"

@@ -128,11 +128,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                 productDetails?.salePrice > 0 ? "line-through" : ""
               }`}
             >
-              ${productDetails?.price}
+              {productDetails?.price} VND
             </p>
             {productDetails?.salePrice > 0 ? (
               <p className="text-3xl font-bold text-red-500">
-                ${productDetails?.salePrice}
+                {productDetails?.salePrice} VND
               </p>
             ) : null}
           </div >

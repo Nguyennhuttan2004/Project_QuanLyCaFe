@@ -9,17 +9,19 @@ const initialState = {
 
 export const registerUser = createAsyncThunk(
   "/auth/register",
-
   async (formData) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/auth/register",
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
-
-    return response.data;
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      return { success: true, ...response.data };
+    } catch (error) {
+      return { success: false, message: error.response.data.message };
+    }
   }
 );
 

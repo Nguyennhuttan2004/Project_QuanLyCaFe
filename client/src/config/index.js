@@ -236,3 +236,18 @@ export const shoppingViewHeaderMenuItems = [
       placeholder: "Enter any additional notes",
     },
   ];
+
+
+  export const shoppingViewFooterService = [
+   {
+      id: "aboutUs",
+      label: "About Us",
+      path: "/shop/about",
+    },
+    {
+      id: "Contact",
+      label: "Contact",
+      path: "/shop/listing?category=traSua",
+    },
+  
+  ];

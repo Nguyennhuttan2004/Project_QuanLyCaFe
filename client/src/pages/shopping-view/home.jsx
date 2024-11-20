@@ -1,6 +1,3 @@
-import bannerOne from "../../assets/banner-1.jpg";
-import bannerTwo from "../../assets/Thiết kế chưa có tên.png";
-import bannerThree from "../../assets/Black Simple Coffee Landscape Banner.png";
 import { Button } from "@/components/ui/button";
 import {
   CakeSlice,
@@ -23,8 +20,10 @@ import "./../../css/video.css";
 import videoSource from "./../../assets/coffeeshop.mp4";
 import imageVideo from "./../../assets/videoimage.jpg";
 import { getFeatureImages } from "/store/common/common-slice";
-import About from "@/components/shopping-view/about";
-
+import img1 from "../../assets/image/about-img.png";
+import img2 from "../../assets/image/about-icon-1.png";
+import img3 from "../../assets/image/about-icon-2.png";
+import img4 from "../../assets/image/about-icon-3.png";
 const categories = [
   { id: "bestSeller", label: "Best Seller", icon: LucideCoffee },
   { id: "traSua", label: "Trà Sữa", icon: MilkIcon },
@@ -125,6 +124,13 @@ function ShoppingHome() {
     if (productDetails !== null) setOpenDetailsDialog(true);
   }, [productDetails]);
   console.log("Feature Image List:", featureImageList);
+
+
+  const handleReadMore = () => {
+    navigate(`/shop/about`);
+  };
+
+  const isHomePage = true; 
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -241,13 +247,13 @@ function ShoppingHome() {
               </p>
             </div>
             <div className="digital_content">
-              {/* Kiểm tra đường dẫn video và đảm bảo nó chính xác */}
               <video
                 poster={imageVideo}
                 muted
                 controls
                 preload="auto"
-                src={videoSource} // Sử dụng require để đảm bảo đường dẫn chính xác
+                autoPlay
+                src={videoSource} 
                 onError={(e) => {
                   console.error("Video failed to load:", e);
                 }}
@@ -256,9 +262,56 @@ function ShoppingHome() {
           </div>
         </section>
 
-        <section className="">
-          <About />
-        </section>
+        <div className="flex flex-col min-h-screen">
+        <div className="p-10">
+          {/* Chỉ hiển thị đoạn mã của About */}
+          <section className="about" id="about">
+            <h1 className="heading">
+              about us{" "}
+              <span className="text-[#A67C6D] font-bold">why choose us</span>
+            </h1>
+            <div className="row">
+              <div className="image">
+                <img src={img1} alt="" />
+              </div>
+              <div className="content">
+                <h3 className="title">Mỗi tách cà phê, một câu chuyện</h3>
+                <p>
+                  Chào mừng bạn đến với quán cà phê của chúng tôi, nơi mang đến cho
+                  bạn những trải nghiệm tuyệt vời nhất. Tại đây, chúng tôi không chỉ
+                  phục vụ những tách cà phê thơm ngon được chế biến từ hạt cà phê
+                  chất lượng cao, mà còn tạo ra một không gian ấm cúng và thân
+                  thiện, lý tưởng cho những buổi gặp gỡ bạn bè hay những giờ phút
+                  thư giãn một mình. Với đội ngũ nhân viên nhiệt tình và chuyên
+                  nghiệp, chúng tôi cam kết mang đến cho bạn dịch vụ tốt nhất. Hãy
+                  đến và khám phá hương vị độc đáo của từng ly cà phê, cùng với
+                  những món ăn nhẹ hấp dẫn, để cảm nhận sự khác biệt mà chúng tôi
+                  mang lại!
+                </p>
+                {isHomePage && (
+              <button onClick={handleReadMore} className="btn">
+                Đọc thêm
+              </button>
+            )}
+                <div className="icons-container">
+                  <div className="icons">
+                    <img src={img2} alt="" />
+                    <h3>cà phê chất lượng</h3>
+                  </div>
+                  <div className="icons">
+                    <img src={img3} alt="" />
+                    <h3>chi nhánh của chúng tôi</h3>
+                  </div>
+                  <div className="icons">
+                    <img src={img4} alt="" />
+                    <h3>giao hàng miễn phí</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
 
         <ProductDetailsDialog
           open={openDetailsDialog}

@@ -111,7 +111,7 @@ function AdminDashboard() {
             <CircleDollarSign className="text-green-500" />
           </CardHeader>
           <CardContent className="p-4">
-            <p className="text-2xl font-bold text-gray-800">${totalRevenue}</p>
+            <p className="text-2xl font-bold text-gray-800">{totalRevenue} VND</p>
           </CardContent>
         </Card>
 

@@ -26,6 +26,7 @@ import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
 import About from "./components/shopping-view/about";
 import AdminUser from "./pages/admin-view/users";
+import ContactPage from "./components/shopping-view/contact";
 // import ShoppingOrders from "./components/shopping-view/orders";
 
 function App() {
@@ -100,8 +101,8 @@ function App() {
             <Route path="paypal-return" element={<PaypalReturnPage />} />
             <Route path="payment-success" element={<PaymentSuccessPage />} />
             <Route path="search" element={<SearchProducts />} />
-            <Route path="about" element={<About />} />
-            {/* <Route path="order" element={<ShoppingOrders />} /> */}
+            <Route path="about" element={<About />} /> 
+            <Route path="contact" element={<ContactPage />} /> 
 
           </Route>
           <Route path="*" element={<NotFound />} />

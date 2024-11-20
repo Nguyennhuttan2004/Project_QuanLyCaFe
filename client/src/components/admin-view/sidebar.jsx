@@ -4,6 +4,7 @@ import {
     ChartNoAxesCombined,
     LayoutDashboard,
     ShoppingBasket,
+    User,
   } from "lucide-react";
   import { Fragment } from "react";
   import { useNavigate } from "react-router-dom";
@@ -38,7 +39,7 @@ import {
       id: "users",
       label: "User",
       path: "/admin/users",
-      icon: <BookHeart />
+      icon: <User/>
     },
 
   ];
