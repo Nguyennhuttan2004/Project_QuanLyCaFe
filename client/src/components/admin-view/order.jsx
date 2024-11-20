@@ -59,7 +59,7 @@ function AdminOrdersView() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>All Orders</CardTitle>
+        <CardTitle className="text-4xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">All Orders</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>

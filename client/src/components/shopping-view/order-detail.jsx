@@ -10,6 +10,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
   return (
     <DialogContent className="sm:max-w-[600px]">
       <div className="grid gap-6">
+        <h1 className="text-2xl font-bold">Order Details</h1>
         <div className="grid gap-2">
           <div className="flex mt-6 items-center justify-between">
             <p className="font-medium">Order ID</p>
@@ -78,7 +79,6 @@ function ShoppingOrderDetailsView({ orderDetails }) {
               <span>{user.userName}</span>
               <span>{orderDetails?.addressInfo?.address}</span>
               <span>{orderDetails?.addressInfo?.city}</span>
-              <span>{orderDetails?.addressInfo?.pincode}</span>
               <span>{orderDetails?.addressInfo?.phone}</span>
               <span>{orderDetails?.addressInfo?.notes}</span>
             </div>

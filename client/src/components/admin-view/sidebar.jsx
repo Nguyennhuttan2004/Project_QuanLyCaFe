@@ -41,7 +41,13 @@ import {
       path: "/admin/users",
       icon: <User/>
     },
-
+    {
+      id: "support",
+      label: "support customers",
+      path: "/admin/supportCustomer",
+      icon: <User/>
+    },
+    
   ];
   
   function MenuItems({ setOpen }) {

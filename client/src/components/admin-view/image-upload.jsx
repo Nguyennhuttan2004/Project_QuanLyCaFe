@@ -67,7 +67,7 @@ function ProductImageUpLoad({
 
   return (
     <div className={`w-full  mt-4 ${isCustomStyling ? "" : "max-w-md mx-auto"}`}>
-      <Label className="text-lg font-semibold mb-2 block">UpLoad Image</Label>
+      <Label className="text-2xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">UpLoad Image</Label>
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}

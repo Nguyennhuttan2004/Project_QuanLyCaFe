@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import {
   shoppingViewFooterMenuItems,
-  shoppingViewFooterService,
 } from "@/config";
 import { Label } from "../ui/label";
 
@@ -178,7 +177,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/contact" className="flex items-center  service">
+                <a href="/shop/contact" className="flex items-center  service">
                   <i className="mr-2 ">
                     <MoveRight />
                   </i>

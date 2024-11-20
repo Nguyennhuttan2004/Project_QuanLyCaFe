@@ -17,7 +17,6 @@ const initialAddressFormData = {
   address: "",
   city: "",
   phone: "",
-  pincode: "",
   notes: "",
 };
 
@@ -95,7 +94,6 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
       address: getCuurentAddress?.address,
       city: getCuurentAddress?.city,
       phone: getCuurentAddress?.phone,
-      pincode: getCuurentAddress?.pincode,
       notes: getCuurentAddress?.notes,
     });
   }
@@ -110,37 +108,47 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     dispatch(fetchAllAddresses(user?.id));
   }, [dispatch]);
 
-  console.log(addressList, "addressList");
-
   return (
-    <Card>
-      <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {addressList && addressList.length > 0
-          ? addressList.map((singleAddressItem) => (
-              <AddressCard
-                selectedId={selectedId}
-                handleDeleteAddress={handleDeleteAddress}
-                addressInfo={singleAddressItem}
-                handleEditAddress={handleEditAddress}
-                setCurrentSelectedAddress={setCurrentSelectedAddress}
-              />
-            ))
-          : null}
-      </div>
+    <Card className="p-6 bg-white shadow-lg rounded-lg">
       <CardHeader>
-        <CardTitle>
-          {currentEditedId !== null ? "Edit Address" : "Add New Address"}
+        <CardTitle className="text-2xl font-bold text-center mb-4">
+        
+Quản lý địa chỉ của bạn
         </CardTitle>
+        <p className="text-gray-600 text-center">
+          Hãy chọn hoặc thêm mới địa chỉ của bạn.
+        </p>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <CommonForm
-          formControls={addressFormControls}
-          formData={formData}
-          setFormData={setFormData}
-          buttonText={currentEditedId !== null ? "Edit" : "Add"}
-          onSubmit={handleManageAddress}
-          isBtnDisabled={!isFormValid()}
-        />
+      <CardContent className="space-y-4">
+        <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {addressList && addressList.length > 0
+            ? addressList.map((singleAddressItem) => (
+                <AddressCard
+                  key={singleAddressItem._id}
+                  selectedId={selectedId}
+                  handleDeleteAddress={handleDeleteAddress}
+                  addressInfo={singleAddressItem}
+                  handleEditAddress={handleEditAddress}
+                  setCurrentSelectedAddress={setCurrentSelectedAddress}
+                />
+              ))
+            : <p className="text-center text-gray-500">No addresses found.</p>}
+        </div>
+        <CardHeader>
+          <CardTitle>
+            {currentEditedId !== null ? "Edit Address" : "Add New Address"}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <CommonForm
+            formControls={addressFormControls}
+            formData={formData}
+            setFormData={setFormData}
+            buttonText={currentEditedId !== null ? "Edit" : "Add"}
+            onSubmit={handleManageAddress}
+            isBtnDisabled={!isFormValid()}
+          />
+        </CardContent>
       </CardContent>
     </Card>
   );

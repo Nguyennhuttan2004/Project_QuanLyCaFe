@@ -55,7 +55,7 @@ function Users() {
 
     return (
         <div className="user-list">
-            <h1>User List</h1>
+            <h1 className="text-4xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">User List</h1>
             <table>
                 <thead>
                     <tr>

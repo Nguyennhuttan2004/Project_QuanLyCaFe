@@ -39,7 +39,7 @@ function AdminFeatures() {
         imageLoadingState={imageLoadingState}
         isCustomStyling={true}
       />
-        <Button onClick={handleUploadFeatureImage} className="mt-5 w-full">
+        <Button onClick={handleUploadFeatureImage} className="mt-5 w-full btn mb-10">
         Upload
       </Button>
       <div className="flex flex-col gap-4 mt-5">

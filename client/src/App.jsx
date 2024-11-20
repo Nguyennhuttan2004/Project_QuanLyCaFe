@@ -27,6 +27,7 @@ import SearchProducts from "./pages/shopping-view/search";
 import About from "./components/shopping-view/about";
 import AdminUser from "./pages/admin-view/users";
 import ContactPage from "./components/shopping-view/contact";
+import SupportCustomer from "./pages/admin-view/supportCus";
 // import ShoppingOrders from "./components/shopping-view/orders";
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
             <Route path="orders" element={<AdminOders />} />
             <Route path="features" element={<AdminFeatures />} />
             <Route path="users" element={<AdminUser/>} />
+            <Route path="supportCustomer" element={<SupportCustomer/>} />
           </Route>
           <Route
             path="/shop"

@@ -109,29 +109,14 @@ export const shoppingViewHeaderMenuItems = [
       path: "/shop/listing",
     },
     {
-      id: "bestSeller",
-      label: "Best Seller",
-      path: "/shop/listing?category=bestSeller",
+      id: "aboutUs",
+      label: "About Us",
+      path: "/shop/about",
     },
     {
-      id: "traSua",
-      label: "Trà Sữa",
-      path: "/shop/listing?category=traSua",
-    },
-    {
-      id: "caPhe",
-      label: "Cà Phê",
-      path: "/shop/listing?category=caPhe",
-    },
-    {
-      id: "daXay",
-      label: "Đá Xay",
-      path: "/shop/listing?category=daXay",
-    },
-    {
-      id: "banhNgot",
-      label: "Bánh Ngọt",
-      path: "/shop/listing?category=banhNgot",
+      id: "contact",
+      label: "Contact",
+      path: "/shop/contact",
     },
     {
       id: "search",
@@ -216,13 +201,6 @@ export const shoppingViewHeaderMenuItems = [
       placeholder: "Enter your city",
     },
     {
-      label: "Pincode",
-      name: "pincode",
-      componentType: "input",
-      type: "text",
-      placeholder: "Enter your pincode",
-    },
-    {
       label: "Phone",
       name: "phone",
       componentType: "input",
@@ -238,16 +216,3 @@ export const shoppingViewHeaderMenuItems = [
   ];
 
 
-  export const shoppingViewFooterService = [
-   {
-      id: "aboutUs",
-      label: "About Us",
-      path: "/shop/about",
-    },
-    {
-      id: "Contact",
-      label: "Contact",
-      path: "/shop/listing?category=traSua",
-    },
-  
-  ];

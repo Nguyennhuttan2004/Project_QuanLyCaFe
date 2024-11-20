@@ -20,7 +20,9 @@ const shopSearchRouter = require("./routes/shop/search-routes.js");
 const shopReviewRouter = require("./routes/shop/review-routes.js");
 
 const commonFeatureRouter = require("./routes/common/feature-routes.js");
-const momoPaymentRouter = require('./routes/common/momoPayment-routes.js')
+const momoPaymentRouter = require('./routes/common/momoPayment-routes.js');
+const supportRequestRouter = require('./routes/common/supportRequest-routes.js');
+
 
 mongoose
   .connect(
@@ -76,5 +78,6 @@ app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
 app.use('/api/common/payment', momoPaymentRouter);
+app.use('/api', supportRequestRouter);
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

@@ -1,0 +1,36 @@
+.support-customer-container {
+    padding: 20px;
+}
+
+.support-title {
+    font-size: 2.5rem; /* Kích thước chữ lớn hơn */
+    color: #333; /* Màu chữ */
+    text-align: center; /* Căn giữa */
+    margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+    position: relative; /* Để tạo hiệu ứng */
+}
+
+.support-title::after {
+    content: ""; /* Tạo một đường gạch dưới */
+    display: block;
+    width: 50%; /* Chiều rộng của đường gạch */
+    height: 4px; /* Chiều cao của đường gạch */
+    margin: 10px auto; /* Căn giữa */
+    border-radius: 2px; /* Bo góc */
+}
+
+.support-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.support-table th, .support-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.support-table th {
+    background-color: #f2f2f2;
+}
+
