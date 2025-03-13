@@ -234,7 +234,7 @@ const Footer = () => {
         </div>
       </div>
       {isVisible && (
-        <div id="scrolltop" onClick={scrollToTop}>
+        <div className="" id="scrolltop" onClick={scrollToTop}>
           <button className="back_to_top" aria-label="Scroll to top">
             <Upload className="ml-4" />
           </button>

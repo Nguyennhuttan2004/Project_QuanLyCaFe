@@ -211,11 +211,12 @@ footer {
     font-weight: bold;
     color: #fff;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 120px;
+    right: 28px;
     font-size: 20px;
     transition: all 0.5s;
     box-shadow: -4px 4px 24px -10px #A67C6D; /* Updated shadow color */
+    
   }
   
   /* Keyframes remain unchanged */

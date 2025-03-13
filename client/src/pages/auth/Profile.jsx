@@ -41,7 +41,7 @@ function Profile() {
         console.log({ data });
         alert("Avatar updated successfully!");
 
-        const newAvatarUrl = data.avatar; // Adjust this if necessary
+        const newAvatarUrl = data.avatar; 
         console.log("New Avatar URL:", newAvatarUrl);
 
         setAvatarPreview(img); // Update avatarPreview with the new avatar URL

@@ -42,21 +42,23 @@ const Register = () => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <div className="">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Tạo tài khoản mới</h1>
-        <p className="mt-2">
-          Nếu đã có tài khoản!!! Hãy đến trang này
-          <Link className="font-medium text-primary ml-2 hover:underline" to='/auth/login'>Đăng nhập</Link>
-        </p>
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className="w-full max-w-md space-y-6 bg-white p-8 rounded-lg shadow-md "> 
+        <div className="">
+          <h1 className="text-3xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">Tạo tài khoản mới</h1>
+          <p className="mt-2 text-gray-600 text-center"> 
+            Nếu đã có tài khoản!!! Hãy đến trang này
+            <Link className="font-medium text-blue-600 ml-2 hover:underline" to='/auth/login'>Đăng nhập</Link> 
+          </p>
+        </div>
+        <CommonForm
+          formControls={registerFormControls}
+          buttonText={'Đăng ký'}
+          formData={formData}
+          setFormData={setFormData}
+          onSubmit={onSubmit}
+        />
       </div>
-      <CommonForm
-        formControls={registerFormControls}
-        buttonText={'Đăng ký'}
-        formData={formData}
-        setFormData={setFormData}
-        onSubmit={onSubmit}
-      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const Order = require('../../models/Order');
 
 // Lấy danh sách tất cả người dùng
 exports.getAllUsers = async (req, res) => {
@@ -63,23 +64,27 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findByIdAndDelete(id);
-    
-        if (!user)
-          return res.status(404).json({
-            success: false,
-            message: "User not found",
-          });
-    
+
+        const orders = await Order.find({ userId: id });
+
+        if (orders.length > 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Cannot delete a user with existing orders.",
+            });
+        }
+
+        await User.findByIdAndDelete(id);
+
         res.status(200).json({
-          success: true,
-          message: "User delete successfully",
+            success: true,
+            message: "User deleted successfully.",
         });
-      } catch (e) {
+    } catch (e) {
         console.log(e);
         res.status(500).json({
-          success: false,
-          message: "Error occured",
+            success: false,
+            message: "Some error occurred!",
         });
-      }
+    }
 };

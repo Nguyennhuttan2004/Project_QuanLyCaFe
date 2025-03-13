@@ -1,0 +1,56 @@
+/* KommunicateChat.css */
+
+/* Tổng thể Container */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  max-width: 90%;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  z-index: 9999;
+  overflow: hidden;
+  animation: slideUp 0.5s ease-in-out;
+}
+
+/* Header Chatbot */
+.chatbot-header {
+  background-color: #4A90E2;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+}
+
+/* Widget Chat */
+.chatbot-widget {
+  height: 500px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  border-radius: 0 0 15px 15px;
+}
+
+/* Hiệu ứng khi hiển thị */
+@keyframes slideUp {
+  from {
+      transform: translateY(100px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+/* Responsive cho mobile */
+@media (max-width: 600px) {
+  .chatbot-container {
+      width: 100%;
+      bottom: 10px;
+      right: 10px;
+  }
+}

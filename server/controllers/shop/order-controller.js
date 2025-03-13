@@ -51,11 +51,11 @@ const createOrder = async (req, res) => {
 
     paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
       if (error) {
-        console.log(error);
+        console.log("PayPal Error:", error);
 
         return res.status(500).json({
           success: false,
-          message: "Error while creating paypal payment",
+          message: "Error while creating PayPal payment",
         });
       } else {
         const newlyCreatedOrder = new Order({
@@ -87,10 +87,10 @@ const createOrder = async (req, res) => {
       }
     });
   } catch (e) {
-    console.log(e);
+    console.log("Server Error:", e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
@@ -151,7 +151,7 @@ const getAllOrdersByUser = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const orders = await Order.find({ userId });
+    const orders = await Order.find({ userId }).populate('cartItems.productId');
 
     if (!orders.length) {
       return res.status(404).json({
@@ -168,7 +168,7 @@ const getAllOrdersByUser = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };

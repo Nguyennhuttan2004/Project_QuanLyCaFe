@@ -1,29 +1,55 @@
 const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema({
-  userId: String,
-  cartId: String,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  cartId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cart",
+    required: true
+  },
   cartItems: [
     {
-      productId: String,
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true
+      },
       title: String,
       image: String,
-      price: String,
+      price: Number,
       quantity: Number,
     },
   ],
   addressInfo: {
-    addressId: String,
+    addressId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Address"
+    },
     address: String,
     city: String,
     phone: String,
     notes: String,
   },
-  orderStatus: String,
+  orderStatus: {
+    type: String,
+    default: "Pending"
+  },
   paymentMethod: String,
-  paymentStatus: String,
+  paymentStatus: {
+    type: String,
+    default: "Pending"
+  },
   totalAmount: Number,
-  orderDate: Date,
+  shippingFee: Number,
+  discount: Number,
+  orderDate: {
+    type: Date,
+    default: Date.now
+  },
   orderUpdateDate: Date,
   paymentId: String,
   payerId: String,

@@ -24,6 +24,7 @@ import img1 from "../../assets/image/about-img.png";
 import img2 from "../../assets/image/about-icon-1.png";
 import img3 from "../../assets/image/about-icon-2.png";
 import img4 from "../../assets/image/about-icon-3.png";
+import KommunicateChat from '../../components/common/KommunicateChat';
 const categories = [
   { id: "bestSeller", label: "Best Seller", icon: LucideCoffee },
   { id: "traSua", label: "Trà Sữa", icon: MilkIcon },
@@ -238,12 +239,12 @@ function ShoppingHome() {
         <section className="digital py-12">
           <div className="container">
             <div className="digital_title">
-              <p className="sub_title">HOW DO WE WORKS</p>
-              <h2>DIGITAL EXPERIENCE</h2>
+            <p className="sub_title">CÀ PHÊ CỦA CHÚNG TÔI</p>
+              <h2 className="text-6xl font-bold text-center m-10 text-[#A67C6D]">TRẢI NGHIỆM CÀ PHÊ</h2>
               <p>
-                We are committed to providing our customers with exceptional
-                service while offering our <br />
-                employees the best training.
+                Chúng tôi cam kết mang đến cho khách hàng dịch vụ xuất sắc
+                trong khi cung cấp cho nhân viên của chúng tôi <br />
+                đào tạo tốt nhất.
               </p>
             </div>
             <div className="digital_content">
@@ -313,12 +314,20 @@ function ShoppingHome() {
         </div>
       </div>
 
+        {/* <Chatbot /> */}
+        <div className="">
+        <KommunicateChat />   
+        </div>
+
         <ProductDetailsDialog
           open={openDetailsDialog}
           setOpen={setOpenDetailsDialog}
           productDetails={productDetails}
         />
       </div>
+
+
+      
     </>
   );
 }

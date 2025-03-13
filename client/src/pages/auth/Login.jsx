@@ -39,21 +39,22 @@ const Login = () => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <div className="">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Đăng nhập  tài khoản của bạn</h1> {/* Fixed typo in "Sign" */}
-        <p className="mt-2"> Không có tài khoản!!! Hãy đăng ký tại đây:
-          <Link className="font-bold text-primary ml-2 hover:underline" to='/auth/register'>Đăng ký</Link>
-        </p>
-      </div>
-      <CommonForm
-        formControls={loginFormControls}
-        buttonText={'Đăng nhập'}
-        formData={formData}
-        setFormData={setFormData}
-        onSubmit={onSubmit}
-      />
+    <div className="mx-auto w-full max-w-md space-y-6 bg-white p-8 rounded-lg shadow-md"> {/* Added background, padding, border radius, and shadow */}
+    <div className="">
+      <h1 className="text-3xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">Đăng nhập tài khoản của bạn</h1> {/* Changed text color */}
+      <p className="mt-2 text-gray-600  text-center"> {/* Changed text color */}
+        Không có tài khoản!!! Hãy đăng ký tại đây:
+        <Link className="font-bold text-blue-600 ml-2 hover:underline" to='/auth/register'>Đăng ký</Link> {/* Changed link color */}
+      </p>
     </div>
+    <CommonForm
+      formControls={loginFormControls}
+      buttonText={'Đăng nhập'}
+      formData={formData}
+      setFormData={setFormData}
+      onSubmit={onSubmit}
+    />
+  </div>
     
   )
 }

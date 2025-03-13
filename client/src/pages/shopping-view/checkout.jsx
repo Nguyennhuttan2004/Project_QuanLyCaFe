@@ -13,7 +13,7 @@ function ShoppingCheckout({ onPaymentSuccess }) {
   const { user } = useSelector((state) => state.auth);
   const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
-  const [isPaymentStart, setIsPaymemntStart] = useState(false);
+  const [isPaymentStart, setIsPaymentStart] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const dispatch = useDispatch();
   const { toast } = useToast();
@@ -34,14 +34,14 @@ function ShoppingCheckout({ onPaymentSuccess }) {
   function handleInitiatePaypalPayment() {
     setPaymentMethod("paypal");
 
-    if (cartItems.length === 0) {
+    if (!cartItems || cartItems.items.length === 0) {
       toast({
         title: "Your cart is empty. Please add items to proceed",
         variant: "destructive",
       });
       return;
     }
-    if (currentSelectedAddress === null) {
+    if (!currentSelectedAddress) {
       toast({
         title: "Please select one address to proceed.",
         variant: "destructive",
@@ -81,10 +81,10 @@ function ShoppingCheckout({ onPaymentSuccess }) {
 
     dispatch(createNewOrder(orderData)).then((data) => {
       if (data?.payload?.success) {
-        setIsPaymemntStart(true);
+        setIsPaymentStart(true);
         onPaymentSuccess(); // Gọi hàm để cập nhật dữ liệu
       } else {
-        setIsPaymemntStart(false);
+        setIsPaymentStart(false);
       }
     });
   }
@@ -139,9 +139,8 @@ function ShoppingCheckout({ onPaymentSuccess }) {
 
     dispatch(createNewOrder(orderData)).then((data) => {
       if (data?.payload?.success) {
-        setIsPaymemntStart(true);
+        setIsPaymentStart(true);
 
-        // Gọi API thanh toán MoMo từ backend
         fetch("http://localhost:5000/api/common/payment/momo", {
           method: "POST",
           headers: {
@@ -166,7 +165,7 @@ function ShoppingCheckout({ onPaymentSuccess }) {
             });
           });
       } else {
-        setIsPaymemntStart(false);
+        setIsPaymentStart(false);
       }
     });
   }
@@ -200,9 +199,10 @@ function ShoppingCheckout({ onPaymentSuccess }) {
           <div className="mt-4 w-full flex justify-between">
             <Button
               onClick={handleInitiatePaypalPayment}
-              className="flex items-center w-full mr-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition duration-200" // Màu xanh biển cho PayPal
+              disabled={isPaymentStart}
+              className="flex items-center w-full mr-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition duration-200"
             >
-              <CircleDollarSign className="mr-2" /> {/* Icon PayPal */}
+              <CircleDollarSign className="mr-2" />
               {isPaymentStart
                 ? "Đang xử lý thanh toán PayPal..."
                 : "Thanh toán bằng PayPal"}
@@ -211,7 +211,7 @@ function ShoppingCheckout({ onPaymentSuccess }) {
               onClick={handleInitiateMomoPayment}
               className="flex items-center w-full ml-2 rounded-lg bg-[#B20873] text-white hover:bg-[#A2076A] transition duration-200" // Màu MoMo
             >
-              <CreditCard className="mr-2" /> {/* Icon MoMo */}
+              <CreditCard className="mr-2" /> 
               {isPaymentStart
                 ? "Đang xử lý thanh toán MoMo..."
                 : "Thanh toán bằng MoMo"}
@@ -223,4 +223,4 @@ function ShoppingCheckout({ onPaymentSuccess }) {
   );
 }
 
-export default ShoppingCheckout;
+  export default ShoppingCheckout;

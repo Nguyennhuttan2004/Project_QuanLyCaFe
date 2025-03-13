@@ -2,9 +2,9 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const User = require("../../models/User"); 
-const fs = require("fs");
 
+const fs = require("fs");
+const User = require("../../models/User"); 
 const avatarRouter = express.Router();
 
 fs.mkdirSync("images/", { recursive: true });

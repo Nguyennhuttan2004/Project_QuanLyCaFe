@@ -39,63 +39,64 @@ export const loginFormControls = [
 ]
 
 export const addProductFormElements = [
-    {
-      label: "Title",
-      name: "title",
-      componentType: "input",
-      type: "text",
-      placeholder: "Enter product title",
-    },
-    {
-      label: "Description",
-      name: "description",
-      componentType: "textarea",
-      placeholder: "Enter product description",
-    },
-    {
-      label: "Category",
-      name: "category",
-      componentType: "select",
-      options: [
-        { id: "bestSeller", label: "Bestseller" },
-        { id: "traSua", label: "Trà Sữa" },
-        { id: "caPhe", label: "Cà Phê" },
-        { id: "banhNgot", label: "Bánh Ngọt" },
-        { id: "daXay", label: "Đá Xay" },
-      ],
-    },
-    {
-      label: "Size",
-      name: "size",
-      componentType: "select",
-      options: [
-        { id: "S", label: "Size S" },
-        { id: "M", label: "Size M" },
-        { id: "L", label: "Size L" },
-      ],
-    },
-    {
-      label: "Price",
-      name: "price",
-      componentType: "input",
-      type: "number",
-      placeholder: "Enter product price",
-    },
-    {
-      label: "Sale Price",
-      name: "salePrice",
-      componentType: "input",
-      type: "number",
-      placeholder: "Enter sale price (optional)",
-    },
-    {
-      label: "Total Stock",
-      name: "totalStock",
-      componentType: "input",
-      type: "number",
-      placeholder: "Enter total stock",
-    },
-  ];
+  {
+    label: "Tên sản phẩm",
+    name: "title",
+    componentType: "input",
+    type: "text",
+    placeholder: "Nhập tên sản phẩm",
+  },
+  {
+    label: "Mô tả",
+    name: "description",
+    componentType: "textarea",
+    placeholder: "Nhập mô tả sản phẩm",
+  },
+  {
+    label: "Danh mục",
+    name: "category",
+    componentType: "select",
+    options: [
+      { id: "bestSeller", label: "Bán chạy nhất" },
+      { id: "traSua", label: "Trà Sữa" },
+      { id: "caPhe", label: "Cà Phê" },
+      { id: "banhNgot", label: "Bánh Ngọt" },
+      { id: "daXay", label: "Đá Xay" },
+    ],
+  },
+  {
+    label: "Kích thước",
+    name: "size",
+    componentType: "select",
+    options: [
+      { id: "S", label: "Size S" },
+      { id: "M", label: "Size M" },
+      { id: "L", label: "Size L" },
+    ],
+  },
+  {
+    label: "Giá",
+    name: "price",
+    componentType: "input",
+    type: "number",
+    placeholder: "Nhập giá sản phẩm",
+  },
+  {
+    label: "Giá khuyến mãi",
+    name: "salePrice",
+    componentType: "input",
+    type: "number",
+    placeholder: "Nhập giá khuyến mãi (không bắt buộc)",
+  },
+  {
+    label: "Tổng số lượng",
+    name: "totalStock",
+    componentType: "input",
+    type: "number",
+    placeholder: "Nhập tổng số lượng",
+  },
+];
+
 
 export const shoppingViewHeaderMenuItems = [
     {
@@ -157,7 +158,7 @@ export const shoppingViewHeaderMenuItems = [
 
   export const filterOptions = {
     category: [
-      { id: "bestSeller", label: "Best Seller" },
+      // { id: "bestSeller", label: "Best Seller" },
       { id: "traSua", label: "Trà Sữa" },
       { id: "caPhe", label: "Cà Phê" },
       { id: "banhNgot", label: "Bánh Ngọt" },

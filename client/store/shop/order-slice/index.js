@@ -11,13 +11,17 @@ const initialState = {
 
 export const createNewOrder = createAsyncThunk(
   "/order/createNewOrder",
-  async (orderData) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/shop/order/create",
-      orderData
-    );
-
-    return response.data;
+  async (orderData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/shop/order/create",
+        orderData
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error creating new order:", error);
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -39,12 +43,16 @@ export const capturePayment = createAsyncThunk(
 
 export const getAllOrdersByUserId = createAsyncThunk(
   "/order/getAllOrdersByUserId",
-  async (userId) => {
-    const response = await axios.get(
-      `http://localhost:5000/api/shop/order/list/${userId}`
-    );
-
-    return response.data;
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/shop/order/list/${userId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching orders by user ID:", error);
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 

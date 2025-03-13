@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
     res.status(201).json({ message: "Đăng ký thành công" });
   } catch (error) {
     console.error("Error saving user:", error);
-    res.status(500).json({ message: "Xảy ra lỗi trong quá trình đăng ký" });
+    res.status(400).json({ message: "userName đã tồn tại" });
   }
 };
 
