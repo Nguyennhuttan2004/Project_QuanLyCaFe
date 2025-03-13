@@ -1,5 +1,14 @@
 const Product = require("../../models/Product.js");
 
+// Xác định chiến lược sắp xếp
+// quy ước 1 là tăng dần và -1 là giảm dần
+const sortingStrategies = {
+  "price-lowtohigh": { price: 1 }, 
+  "price-hightolow": { price: -1 },
+  "title-atoz": { title: 1 },
+  "title-ztoa": { title: -1 },
+};
+
 const getFilteredProducts = async (req, res) => {
   try {
     const { category = [], sortBy = "price-lowtohigh" } = req.query;
@@ -12,34 +21,14 @@ const getFilteredProducts = async (req, res) => {
       filters = { category: "bestSeller" };
     }
 
-    let sort = {};
+    const sort = sortingStrategies[sortBy] || sortingStrategies["price-lowtohigh"];
 
-    switch (sortBy) {
-      case "price-lowtohigh":
-        sort.price = 1;
+    console.log("Filters:", filters);
+    console.log("Sort Strategy:", sort);
 
-        break;
-      case "price-hightolow":
-        sort.price = -1;
-
-        break;
-      case "title-atoz":
-        sort.title = 1;
-
-        break;
-
-      case "title-ztoa":
-        sort.title = -1;
-
-        break;
-
-      default:
-        sort.price = 1;
-        break;
-    }
-    console.log(filters);
     const products = await Product.find(filters).sort(sort);
-    console.log(products);
+    console.log("Sorted Products:", products);
+
     res.status(200).json({
       success: true,
       data: products,
@@ -48,7 +37,7 @@ const getFilteredProducts = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured",
+      message: "Some error occurred",
     });
   }
 };
@@ -69,10 +58,10 @@ const getProductDetails = async (req, res) => {
       data: product,
     });
   } catch (e) {
-    console.log(error);
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured",
+      message: "Some error occurred",
     });
   }
 };

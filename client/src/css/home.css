@@ -1,0 +1,32 @@
+@media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .text-9xl {
+      font-size: 3rem;
+    }
+  
+    .p-10 {
+      padding: 5px;
+    }
+  
+    video {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .text-9xl {
+      font-size: 2rem;
+    }
+  
+    .p-10 {
+      padding: 2px;
+    }
+  }

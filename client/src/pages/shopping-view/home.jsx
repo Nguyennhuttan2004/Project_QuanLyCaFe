@@ -25,6 +25,7 @@ import img2 from "../../assets/image/about-icon-1.png";
 import img3 from "../../assets/image/about-icon-2.png";
 import img4 from "../../assets/image/about-icon-3.png";
 import KommunicateChat from '../../components/common/KommunicateChat';
+import "../../css/home.css";
 const categories = [
   { id: "bestSeller", label: "Best Seller", icon: LucideCoffee },
   { id: "traSua", label: "Trà Sữa", icon: MilkIcon },
@@ -331,4 +332,7 @@ function ShoppingHome() {
     </>
   );
 }
+
+
+
 export default ShoppingHome;

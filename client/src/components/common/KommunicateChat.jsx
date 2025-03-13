@@ -17,7 +17,7 @@ function KommunicateChat() {
             h.appendChild(s);
 
             window.kommunicate = m;
-            m._globals = kommunicateSettings;
+            m._globals = kommunicateSettings;   
         })(document, window.kommunicate || {});
     }, []);
 
