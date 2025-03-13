@@ -85,14 +85,15 @@ function AdminOrdersView() {
                         className={`py-1 px-3 ${
                           orderItem?.orderStatus === "confirmed"
                             ? "bg-green-500"
-                            :orderItem?.orderStatus ==="delivered"
+                            : orderItem?.orderStatus === "delivered"
                             ? "bg-green-600"
                             : orderItem?.orderStatus === "rejected"
                             ? "bg-red-600"
-                            : orderItem?.orderStatus === "pending" ||
-                              orderItem?.orderStatus === "inProcess" ||
+                            : orderItem?.orderStatus === "pending"
+                            ? "bg-yellow-500"
+                            : orderItem?.orderStatus === "inProcess" ||
                               orderItem?.orderStatus === "inShipping"
-                            ? "bg-yellow-500" // Warning color for pending, inProcess, inShipping
+                            ? "bg-yellow-500"
                             : "bg-black"
                         }`}
                       >

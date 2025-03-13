@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require("body-parser"); 
 const path = require('path');
+require('dotenv').config();
 
 const avatarRouter = require('./routes/auth/avatar-route.js');
 const authRouter = require("./routes/auth/auth-route.js")
@@ -25,15 +26,13 @@ const supportRequestRouter = require('./routes/common/supportRequest-routes.js')
 
 
 mongoose
-  .connect(
-    "mongodb+srv://nhuttan288204:nhuttan288204@cluster0.5tgg4.mongodb.net/",{
+  .connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
-    }
-  )
+  })
   
   .then(() => console.log("MongoDB connected"))
-  .catch((erorr) => console.log(erorr));
+  .catch((error) => console.log(error));
 
 const app = express();
 const PORT = process.env.PORT || 5000;

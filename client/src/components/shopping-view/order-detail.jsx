@@ -38,17 +38,18 @@ function ShoppingOrderDetailsView({ orderDetails }) {
               <Badge
                 className={`py-1 px-3 ${
                   orderDetails?.orderStatus === "confirmed"
-                  ? "bg-green-500"
-                  :orderDetails?.orderStatus === "delivered"
-                  ? "bg-green-600"
-                  : orderDetails?.orderStatus === "rejected"
-                  ? "bg-red-600"
-                  : orderDetails?.orderStatus === "pending" ||
-                    orderDetails?.orderStatus === "inProcess" ||
-                    orderDetails?.orderStatus === "inShipping"
-                  ? "bg-yellow-500" // Warning color for pending, inProcess, inShipping
-                  : "bg-black"
-              }`}
+                    ? "bg-green-500"
+                    : orderDetails?.orderStatus === "delivered"
+                    ? "bg-green-600"
+                    : orderDetails?.orderStatus === "rejected"
+                    ? "bg-red-600"
+                    : orderDetails?.orderStatus === "pending"
+                    ? "bg-yellow-500"
+                    : orderDetails?.orderStatus === "inProcess" ||
+                      orderDetails?.orderStatus === "inShipping"
+                    ? "bg-yellow-500"
+                    : "bg-black"
+                }`}
               >
                 {orderDetails?.orderStatus}
               </Badge>

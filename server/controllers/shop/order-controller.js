@@ -109,7 +109,7 @@ const capturePayment = async (req, res) => {
     }
 
     order.paymentStatus = "paid";
-    order.orderStatus = "confirmed";
+    order.orderStatus = "pending";
     order.paymentId = paymentId;
     order.payerId = payerId;
 
@@ -142,7 +142,7 @@ const capturePayment = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
