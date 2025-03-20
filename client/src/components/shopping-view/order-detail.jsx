@@ -18,14 +18,14 @@ function ShoppingOrderDetailsView({ orderDetails }) {
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Order Date</p>
-            <Label>{orderDetails?.orderDate.split("T")[0]}</Label>
+            <Label>{orderDetails?.orderDate?.split("T")[0]}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Order Price</p>
             <Label>{orderDetails?.totalAmount} VND</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Payment method</p>
+            <p className="font-medium">Payment Method</p>
             <Label>{orderDetails?.paymentMethod}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
@@ -48,7 +48,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
                     : orderDetails?.orderStatus === "inProcess" ||
                       orderDetails?.orderStatus === "inShipping"
                     ? "bg-yellow-500"
-                    : "bg-black"
+                    : ""
                 }`}
               >
                 {orderDetails?.orderStatus}
@@ -61,9 +61,9 @@ function ShoppingOrderDetailsView({ orderDetails }) {
           <div className="grid gap-2">
             <div className="font-medium">Order Details</div>
             <ul className="grid gap-3">
-              {orderDetails?.cartItems && orderDetails?.cartItems.length > 0
-                ? orderDetails?.cartItems.map((item) => (
-                    <li className="flex items-center justify-between">
+              {orderDetails?.cartItems?.length > 0
+                ? orderDetails.cartItems.map((item, index) => (
+                    <li key={index} className="flex items-center justify-between">
                       <span>Title: {item.title}</span>
                       <span>Quantity: {item.quantity}</span>
                       <span>Price: {item.price} VND</span>
@@ -77,11 +77,11 @@ function ShoppingOrderDetailsView({ orderDetails }) {
           <div className="grid gap-2">
             <div className="font-medium">Shipping Info</div>
             <div className="grid gap-0.5 text-muted-foreground">
-              <span>{user.userName}</span>
-              <span>{orderDetails?.addressInfo?.address}</span>
-              <span>{orderDetails?.addressInfo?.city}</span>
-              <span>{orderDetails?.addressInfo?.phone}</span>
-              <span>{orderDetails?.addressInfo?.notes}</span>
+              <span>{user?.userName}</span>
+              <span>{orderDetails?.addressId?.streetAddress}</span>
+              <span>{orderDetails?.addressId?.ward}, {orderDetails?.addressId?.district}, {orderDetails?.addressId?.city}</span>
+              <span>{orderDetails?.addressId?.phone}</span>
+              <span>{orderDetails?.addressId?.notes}</span>
             </div>
           </div>
         </div>

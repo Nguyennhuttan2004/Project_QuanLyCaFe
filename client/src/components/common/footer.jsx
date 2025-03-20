@@ -99,16 +99,16 @@ const Footer = () => {
   }
 
   return (
-    <footer className="mt-16">
+    <footer className="mt-16 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
       <div className="container">
-        <div className="footer_top wow animate__animated animate__fadeInUp">
+        <div className="footer_top wow animate__animated animate__fadeInUp bg-white dark:bg-gray-800">
           <div className="footer_text">
-            <h2>Subscribe To Our Newsletter</h2>
+            <h2 className="text-[#A67C6D] dark:text-[#D8CFC4]">Subscribe To Our Newsletter</h2>
           </div>
           <div className="footer_form">
             <form action>
-              <input type="text" name id placeholder="Your Email Address" />
-              <button>
+              <input type="text" name id placeholder="Your Email Address" className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200" />
+              <button className="bg-[#A67C6D] dark:bg-[#D8CFC4] text-white">
                 <i />
                 <Send />
               </button>
@@ -134,19 +134,19 @@ const Footer = () => {
                 <i>
                   <PhoneIcon className="ml-2 mt-2 text-[#A67C6D]" />
                 </i>
-                <span className="text-[#B89B8D]">1800-123-4567 </span>
+                <span className="text-[#B89B8D] dark:text-gray-200">1800-123-4567 </span>
               </li>
               <li>
                 <i>
                   <Mail className="ml-2 mt-2 text-[#A67C6D]" />
                 </i>
-                <span className="text-[#B89B8D]">info@example.com</span>
+                <span className="text-[#B89B8D] dark:text-gray-200">info@example.com</span>
               </li>
               <li>
                 <i>
                   <MapPin className="ml-2 mt-2 text-[#A67C6D]" />
                 </i>
-                <span className="text-[#B89B8D]">
+                <span className="text-[#B89B8D] dark:text-gray-200">
                   Huflit Campus HocMon
                   <br />
                   University
@@ -155,7 +155,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer_item wow animate__animated animate__fadeInUp animate__delay-1s">
-            <h3>Product List</h3>
+            <h3 className="text-[#A67C6D] dark:text-[#D8CFC4]">Product List</h3>
             <ul className="">
               <i className="mr-2">
                 <MenuItems />
@@ -163,7 +163,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className=" footer_item wow animate__animated animate__fadeInUp animate__delay-1s">
-            <h3>Our Services</h3>
+            <h3 className="text-[#A67C6D] dark:text-[#D8CFC4]">Our Services</h3>
             <ul className="">
               <li className="">
                 <a
@@ -187,29 +187,29 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer_item wow animate__animated animate__fadeInUp animate__delay-1s">
-            <h3>Other links</h3>
+            <h3 className="text-[#A67C6D] dark:text-[#D8CFC4]">Other links</h3>
             <div className="flex gap-4">
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] text-[#3b5998] border border-[#E0E0E0] hover:text-[#2d4373] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // Facebook color
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] dark:bg-gray-700 text-[#3b5998] border border-[#E0E0E0] dark:border-gray-700 hover:text-[#2d4373] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // Facebook color
               >
                 <FacebookIcon className="h-7 w-7" /> {/* Increased size */}
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] text-[#E1306C] border border-[#E0E0E0] hover:text-[#b72a5a] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // Instagram color
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] dark:bg-gray-700 text-[#E1306C] border border-[#E0E0E0] dark:border-gray-700 hover:text-[#b72a5a] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // Instagram color
               >
                 <InstagramIcon className="h-7 w-7" /> {/* Increased size */}
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] text-[#333] border border-[#E0E0E0] hover:text-[#1a1a1a] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // GitHub color
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] dark:bg-gray-700 text-[#333] border border-[#E0E0E0] dark:border-gray-700 hover:text-[#1a1a1a] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // GitHub color
               >
                 <GithubIcon className="h-7 w-7" /> {/* Increased size */}
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] text-[#FF0000] border border-[#E0E0E0] hover:text-[#cc0000] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // YouTube color
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#E0E0E0] dark:bg-gray-700 text-[#FF0000] border border-[#E0E0E0] dark:border-gray-700 hover:text-[#cc0000] transition-colors duration-300 transform hover:scale-110 hover:rotate-3" // YouTube color
               >
                 <YoutubeIcon className="h-7 w-7" /> {/* Increased size */}
               </a>
@@ -217,17 +217,17 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="footer_copyright">
+      <div className="footer_copyright bg-gray-800 dark:bg-gray-900">
         <div className="container">
           <div className=" text-center py-4">
-            <p className="text-gray-400">
+            <p className="text-gray-400 dark:text-gray-500">
               Copyright © 2024
               <span className="font-bold text-[#A67C6D] m-2">
                 Coffee Shop
               </span>{" "}
               Design by Nhựt Tân .
             </p>
-            <p className="text-sm text-gray-400 italic mt-2">
+            <p className="text-sm text-gray-400 dark:text-gray-500 italic mt-2">
               "Điểm đến lý tưởng cho những trải nghiệm cà phê đặc biệt!"
             </p>
           </div>

@@ -2,37 +2,36 @@ const Address = require("../../models/Address");
 
 const addAddress = async (req, res) => {
   try {
-    const { userId, address, city, phone, notes } = req.body;
+    const { userId, streetAddress, ward, district, city, phone, notes } = req.body;
 
-    // Log the incoming request body for debugging
-    console.log("Request Body:", req.body);
-
-    if (!userId || !address || !city || !phone || !notes) {
+    if (!userId || !streetAddress || !ward || !district || !city || !phone) {
       return res.status(400).json({
         success: false,
         message: "Invalid data provided!",
       });
     }
 
-    const newlyCreatedAddress = new Address({
+    const newAddress = new Address({
       userId,
-      address,
+      streetAddress,
+      ward,
+      district,
       city,
-      notes,
       phone,
+      notes
     });
 
-    await newlyCreatedAddress.save();
+    await newAddress.save();
 
     res.status(201).json({
       success: true,
-      data: newlyCreatedAddress,
+      data: newAddress,
     });
   } catch (e) {
-    console.error("Error adding address:", e); // Improved error logging
+    console.error("Error adding address:", e);
     res.status(500).json({
       success: false,
-      message: "Error",
+      message: "Server error while adding address",
     });
   }
 };
@@ -43,7 +42,7 @@ const fetchAllAddress = async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        message: "User id is required!",
+        message: "User ID is required!",
       });
     }
 
@@ -54,10 +53,10 @@ const fetchAllAddress = async (req, res) => {
       data: addressList,
     });
   } catch (e) {
-    console.log(e);
+    console.error("Error fetching addresses:", e);
     res.status(500).json({
       success: false,
-      message: "Error",
+      message: "Server error while fetching addresses",
     });
   }
 };
@@ -65,25 +64,22 @@ const fetchAllAddress = async (req, res) => {
 const editAddress = async (req, res) => {
   try {
     const { userId, addressId } = req.params;
-    const formData = req.body;
+    const { streetAddress, ward, district, city, phone, notes } = req.body;
 
     if (!userId || !addressId) {
       return res.status(400).json({
         success: false,
-        message: "User and address id is required!",
+        message: "User ID and Address ID are required!",
       });
     }
 
-    const address = await Address.findOneAndUpdate(
-      {
-        _id: addressId,
-        userId,
-      },
-      formData,
+    const updatedAddress = await Address.findOneAndUpdate(
+      { _id: addressId, userId },
+      { streetAddress, ward, district, city, phone, notes },
       { new: true }
     );
 
-    if (!address) {
+    if (!updatedAddress) {
       return res.status(404).json({
         success: false,
         message: "Address not found",
@@ -92,13 +88,13 @@ const editAddress = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: address,
+      data: updatedAddress,
     });
   } catch (e) {
-    console.log(e);
+    console.error("Error updating address:", e);
     res.status(500).json({
       success: false,
-      message: "Error",
+      message: "Server error while updating address",
     });
   }
 };
@@ -109,13 +105,13 @@ const deleteAddress = async (req, res) => {
     if (!userId || !addressId) {
       return res.status(400).json({
         success: false,
-        message: "User and address id is required!",
+        message: "User ID and Address ID are required!",
       });
     }
 
-    const address = await Address.findOneAndDelete({ _id: addressId, userId });
+    const deletedAddress = await Address.findOneAndDelete({ _id: addressId, userId });
 
-    if (!address) {
+    if (!deletedAddress) {
       return res.status(404).json({
         success: false,
         message: "Address not found",
@@ -127,10 +123,10 @@ const deleteAddress = async (req, res) => {
       message: "Address deleted successfully",
     });
   } catch (e) {
-    console.log(e);
+    console.error("Error deleting address:", e);
     res.status(500).json({
       success: false,
-      message: "Error",
+      message: "Server error while deleting address",
     });
   }
 };

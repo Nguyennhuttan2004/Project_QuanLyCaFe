@@ -18,11 +18,13 @@ import {
 } from "/store/admin/order-slice";
 import { Badge } from "../ui/badge";
 import AdminOrderDetailsView from "./order-detail";
+import ReactPaginate from "react-paginate";
 
 function AdminOrdersView() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1); // Current page state
-  const [itemsPerPage] = useState(6); // Number of items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 5;
+  const [itemsPerPage] = useState(6);
   const { orderList, orderDetails } = useSelector((state) => state.adminOrder);
   const dispatch = useDispatch();
 
@@ -38,28 +40,26 @@ function AdminOrdersView() {
     if (orderDetails !== null) setOpenDetailsDialog(true);
   }, [orderDetails]);
 
-  // Calculate total pages
-  const totalPages = Math.ceil(orderList.length / itemsPerPage);
-
-  // Sort orders by order date in descending order
   const sortedOrders = [...orderList].sort(
     (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
   );
 
-  // Get current orders based on current page
-  const indexOfLastOrder = currentPage * itemsPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - itemsPerPage;
-  const currentOrders = sortedOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+  const pageCount = Math.ceil(sortedOrders.length / ordersPerPage);
+  const displayedOrders = sortedOrders.slice(
+    currentPage * ordersPerPage,
+    (currentPage + 1) * ordersPerPage
+  );
 
-  // Handle page change
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-4xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">All Orders</CardTitle>
+        <CardTitle className="text-4xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">
+          All Orders
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -69,81 +69,81 @@ function AdminOrdersView() {
               <TableHead>Order Date</TableHead>
               <TableHead>Order Status</TableHead>
               <TableHead>Order Price</TableHead>
-              <TableHead>
-                <span className="sr-only">Details</span>
-              </TableHead>
+              <TableHead>Details</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {currentOrders && currentOrders.length > 0
-              ? currentOrders.map((orderItem) => (
-                  <TableRow key={orderItem?._id}>
-                    <TableCell>{orderItem?._id}</TableCell>
-                    <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
-                    <TableCell>
-                    <Badge
-                        className={`py-1 px-3 ${
-                          orderItem?.orderStatus === "confirmed"
-                            ? "bg-green-500"
-                            : orderItem?.orderStatus === "delivered"
-                            ? "bg-green-600"
-                            : orderItem?.orderStatus === "rejected"
-                            ? "bg-red-600"
-                            : orderItem?.orderStatus === "pending"
-                            ? "bg-yellow-500"
-                            : orderItem?.orderStatus === "inProcess" ||
-                              orderItem?.orderStatus === "inShipping"
-                            ? "bg-yellow-500"
-                            : "bg-black"
-                        }`}
-                      >
-                        {orderItem?.orderStatus}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{orderItem?.totalAmount} VND</TableCell>
-                    <TableCell>
-                      <Dialog
-                        open={openDetailsDialog}
-                        onOpenChange={() => {
-                          setOpenDetailsDialog(false);
-                          dispatch(resetOrderDetails());
-                        }}
-                      >
-                        <Button
-                          onClick={() =>
-                            handleFetchOrderDetails(orderItem?._id)
-                          }
-                        >
-                          View Details
-                        </Button>
-                        <AdminOrderDetailsView orderDetails={orderDetails} />
-                      </Dialog>
-                    </TableCell>
-                  </TableRow>
-                ))
-              : null}
+            {displayedOrders.map((orderItem) => (
+              <TableRow key={orderItem?._id}>
+                <TableCell>{orderItem?._id}</TableCell>
+                <TableCell>{orderItem?.orderDate?.split("T")[0]}</TableCell>
+                <TableCell>
+                  <Badge
+                    className={`py-1 px-3 text-white font-semibold rounded-md ${
+                      orderItem?.orderStatus === "pending"
+                        ? "bg-yellow-500"
+                        : orderItem?.orderStatus === "confirmed"
+                        ? "bg-green-500"
+                        : orderItem?.orderStatus === "delivered"
+                        ? "bg-green-700"
+                        : orderItem?.orderStatus === "rejected"
+                        ? "bg-red-500"
+                        : orderItem?.orderStatus === "inShipping"
+                        ? "bg-orange-500"
+                        : "bg-gray-500"
+                    }`}
+                  >
+                    {orderItem?.orderStatus}
+                  </Badge>
+                </TableCell>
+                <TableCell>{orderItem?.totalAmount} VND</TableCell>
+                <TableCell>
+                  <Dialog
+                    open={openDetailsDialog}
+                    onOpenChange={() => {
+                      setOpenDetailsDialog(false);
+                      dispatch(resetOrderDetails());
+                    }}
+                  >
+                    <Button
+                      onClick={() => handleFetchOrderDetails(orderItem?._id)}
+                      className="text-white font-medium px-4 py-2 rounded-md 
+                      transition-all duration-300 ease-in-out 
+                      bg-gradient-to-r from-[#A67C6D] via-[#D8CFC4] to-[#A67C6D]
+                      hover:from-[#D8CFC4] hover:to-[#A67C6D]"
+                    >
+                      View Details
+                    </Button>
+                    <AdminOrderDetailsView orderDetails={orderDetails} />
+                  </Dialog>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
 
-        {/* Pagination Controls */}
-        <div className="flex justify-center mt-4 space-x-2">
-          <Button
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            Previous
-          </Button>
-          <div className="text-center mt-2 pl-3 pr-3">
-            Page {currentPage} of {totalPages}
-          </div>
+         {/* ✅ Thêm phân trang */}
+         <div className="flex justify-center mt-6">
+  <ReactPaginate
+    previousLabel={"← Prev"}
+    nextLabel={"Next →"}
+    pageCount={pageCount}
+    onPageChange={handlePageChange}
+    containerClassName={"flex items-center space-x-2"}
+    pageClassName={
+      "px-4 py-2 border border-[#A67C6D] text-[#A67C6D] font-medium rounded-md transition-all duration-300 hover:bg-[#A67C6D] hover:text-white"
+    }
+    activeClassName={"bg-[#A67C6D] text-white font-bold"}
+    previousClassName={
+      "px-4 py-2 border border-gray-400 text-gray-500 rounded-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
+    }
+    nextClassName={
+      "px-4 py-2 border border-gray-400 text-gray-500 rounded-md transition-all duration-300 hover:bg-gray-400 hover:text-white"
+    }
+    disabledClassName={"opacity-50 cursor-not-allowed"}
+  />
+</div>
 
-          <Button
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            Next
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );

@@ -1,4 +1,5 @@
 const Order = require("../../models/Order");
+const OrderContext = require("../../models/OrderContext");
 
 const getAllOrdersOfAllUsers = async (req, res) => {
   try {
@@ -56,26 +57,23 @@ const updateOrderStatus = async (req, res) => {
     const { orderStatus } = req.body;
 
     const order = await Order.findById(id);
-
     if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found!",
-      });
+      return res.status(404).json({ success: false, message: "Order not found!" });
     }
 
-    await Order.findByIdAndUpdate(id, { orderStatus });
+    const orderContext = new OrderContext(order);
+    const result = orderContext.updateStatus(orderStatus);
 
-    res.status(200).json({
-      success: true,
-      message: "Order status is updated successfully!",
-    });
+    if (!result.success) {
+      return res.status(400).json(result);
+    }
+
+    await order.save();
+
+    res.status(200).json(result);
   } catch (e) {
     console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Some error occured!",
-    });
+    res.status(500).json({ success: false, message: "Some error occurred!" });
   }
 };
 const getTotalOrders = async (req, res) => {

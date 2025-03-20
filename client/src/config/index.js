@@ -188,32 +188,47 @@ export const shoppingViewHeaderMenuItems = [
 
   export const addressFormControls = [
     {
-      label: "Address",
-      name: "address",
+      label: "Số nhà, Tên đường",
+      name: "streetAddress",
       componentType: "input",
       type: "text",
-      placeholder: "Enter your address",
+      placeholder: "Nhập số nhà, tên đường",
     },
     {
-      label: "City",
+      label: "Phường/Xã",
+      name: "ward",
+      componentType: "input",
+      type: "text",
+      placeholder: "Nhập Phường/Xã",
+    },
+    {
+      label: "Quận/Huyện",
+      name: "district",
+      componentType: "input",
+      type: "text",
+      placeholder: "Nhập Quận/Huyện",
+    },
+    {
+      label: "Tỉnh/Thành phố",
       name: "city",
       componentType: "input",
       type: "text",
-      placeholder: "Enter your city",
+      placeholder: "Nhập Tỉnh/Thành phố",
     },
     {
-      label: "Phone",
+      label: "Số điện thoại",
       name: "phone",
       componentType: "input",
       type: "text",
-      placeholder: "Enter your phone number",
+      placeholder: "Nhập số điện thoại của bạn",
     },
     {
-      label: "Notes",
+      label: "Ghi chú",
       name: "notes",
       componentType: "textarea",
-      placeholder: "Enter any additional notes",
-    },
+      placeholder: "Nhập ghi chú thêm (nếu có)",
+    }
   ];
+  
 
 

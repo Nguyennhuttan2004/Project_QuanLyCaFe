@@ -9,9 +9,16 @@ const {
 
 const router = express.Router();
 
-router.post("/add", addAddress);
-router.get("/get/:userId", fetchAllAddress);
-router.delete("/delete/:userId/:addressId", deleteAddress);
-router.put("/update/:userId/:addressId", editAddress);
+// Thêm địa chỉ mới
+router.post("/", addAddress);
+
+// Lấy danh sách địa chỉ của người dùng
+router.get("/:userId", fetchAllAddress);
+
+// Cập nhật địa chỉ
+router.put("/:userId/:addressId", editAddress);
+
+// Xóa địa chỉ
+router.delete("/:userId/:addressId", deleteAddress);
 
 module.exports = router;

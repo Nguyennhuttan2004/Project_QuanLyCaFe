@@ -1,29 +1,31 @@
 const { imageUploadUtil } = require("../../helpers/cloudinary.js");
 const Product = require("../../models/Product");
+
+// 🖼️ Upload hình ảnh lên Cloudinary
 const handleImageUpload = async (req, res) => {
   try {
     const b64 = Buffer.from(req.file.buffer).toString("base64");
-    const url = "data:" + req.file.mimetype + ";base64," + b64;
+    const url = `data:${req.file.mimetype};base64,${b64}`;
     const result = await imageUploadUtil(url);
 
-    res.json({
-      success: true,
-      result,
-    });
+    res.json({ success: true, result });
   } catch (error) {
     console.log(error);
-    res.json({
-      success: false,
-      message: "Xảy ra lỗi !",
-    });
+    res.json({ success: false, message: "Xảy ra lỗi khi upload ảnh!" });
   }
 };
 
-// add product
-
+// ➕ Thêm sản phẩm mới
 const addProduct = async (req, res) => {
   try {
-    const {
+    const { image, title, description, category, size, price, salePrice, totalStock } = req.body;
+
+    // Đảm bảo `salePrice` không vượt quá `price`
+    if (salePrice > price) {
+      return res.status(400).json({ success: false, message: "Sale price cannot be greater than the original price." });
+    }
+
+    const newProduct = new Product({
       image,
       title,
       description,
@@ -32,131 +34,70 @@ const addProduct = async (req, res) => {
       price,
       salePrice,
       totalStock,
-      averageReview,
-    } = req.body;
-
-    console.log(averageReview, "averageReview");
-
-    const newlyCreatedProduct = new Product({
-      image,
-      title,
-      description,
-      category,
-      size,
-      price,
-      salePrice,
-      totalStock,
-      averageReview,
     });
 
-    await newlyCreatedProduct.save();
-    res.status(201).json({
-      success: true,
-      data: newlyCreatedProduct,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Error occured",
-    });
+    await newProduct.save();
+    res.status(201).json({ success: true, data: newProduct });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Lỗi khi thêm sản phẩm" });
   }
 };
 
-
-// fetch all product
+// 📦 Lấy danh sách tất cả sản phẩm
 const fetchAllProducts = async (req, res) => {
   try {
-    const listOfProducts = await Product.find({});
-    res.status(200).json({
-      success: true,
-      data: listOfProducts,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Error occured",
-    });
+    const products = await Product.find({});
+    res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Lỗi khi lấy sản phẩm" });
   }
 };
-// edit product
+
+// ✏️ Chỉnh sửa sản phẩm
 const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      image,
-      title,
-      description,
-      category,
-      size,
-      price,
-      salePrice,
-      totalStock,
-      averageReview,
-    } = req.body;
+    const { image, title, description, category, size, price, salePrice, totalStock } = req.body;
 
-    let findProduct = await Product.findById(id);
-    if (!findProduct)
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      }); 
+    // Đảm bảo `salePrice` không vượt quá `price`
+    if (salePrice > price) {
+      return res.status(400).json({ success: false, message: "Sale price cannot be greater than the original price." });
+    }
 
-    findProduct.title = title || findProduct.title;
-    findProduct.description = description || findProduct.description;
-    findProduct.category = category || findProduct.category;
-    findProduct.size = size || findProduct.size;
-    findProduct.price = price === "" ? 0 : price || findProduct.price;
-    findProduct.salePrice =
-      salePrice === "" ? 0 : salePrice || findProduct.salePrice;
-    findProduct.totalStock = totalStock || findProduct.totalStock;
-    findProduct.image = image || findProduct.image;
-    findProduct.averageReview = averageReview || findProduct.averageReview;
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      { image, title, description, category, size, price, salePrice, totalStock },
+      { new: true, runValidators: true }
+    );
 
-    await findProduct.save();
-    res.status(200).json({
-      success: true,
-      data: findProduct,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Error occured",
-    });
+    if (!updatedProduct) {
+      return res.status(404).json({ success: false, message: "Sản phẩm không tồn tại" });
+    }
+
+    res.status(200).json({ success: true, data: updatedProduct });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Lỗi khi cập nhật sản phẩm" });
   }
 };
-// delete product
 
+// ❌ Xóa sản phẩm
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findByIdAndDelete(id);
+    const deletedProduct = await Product.findByIdAndDelete(id);
 
-    if (!product)
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
+    if (!deletedProduct) {
+      return res.status(404).json({ success: false, message: "Sản phẩm không tồn tại" });
+    }
 
-    res.status(200).json({
-      success: true,
-      message: "Product delete successfully",
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Error occured",
-    });
+    res.status(200).json({ success: true, message: "Sản phẩm đã bị xóa" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Lỗi khi xóa sản phẩm" });
   }
 };
 
-module.exports = {
-  handleImageUpload,
-  editProduct,
-  fetchAllProducts,
-  addProduct,
-  deleteProduct,
-};
+module.exports = { handleImageUpload, addProduct, fetchAllProducts, editProduct, deleteProduct };

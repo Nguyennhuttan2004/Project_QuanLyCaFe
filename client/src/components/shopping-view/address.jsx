@@ -8,16 +8,19 @@ import {
   editAddress,
   fetchAllAddresses,
 } from "/store/shop/address-slice";
-
 import CommonForm from "../common/form";
 import AddressCard from "./address-card";
 import { useToast } from "@/hooks/use-toast";
 
 const initialAddressFormData = {
-  address: "",
+  streetAddress: "",
+  ward: "",
+  district: "",
   city: "",
   phone: "",
   notes: "",
+  addressType: "Home",
+  isDefault: false,
 };
 
 function Address({ setCurrentSelectedAddress, selectedId }) {
@@ -37,7 +40,6 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
         title: "You can add max 3 addresses",
         variant: "destructive",
       });
-
       return;
     }
 
@@ -87,33 +89,39 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     });
   }
 
-  function handleEditAddress(getCuurentAddress) {
-    setCurrentEditedId(getCuurentAddress?._id);
+  function handleEditAddress(getCurrentAddress) {
+    if (!getCurrentAddress) return;
+    
+    setCurrentEditedId(getCurrentAddress?._id);
     setFormData({
-      ...formData,
-      address: getCuurentAddress?.address,
-      city: getCuurentAddress?.city,
-      phone: getCuurentAddress?.phone,
-      notes: getCuurentAddress?.notes,
+      streetAddress: getCurrentAddress?.streetAddress || "",
+      ward: getCurrentAddress?.ward || "",
+      district: getCurrentAddress?.district || "",
+      city: getCurrentAddress?.city || "",
+      phone: getCurrentAddress?.phone || "",
+      notes: getCurrentAddress?.notes || "",
+      addressType: getCurrentAddress?.addressType || "Home",
+      isDefault: getCurrentAddress?.isDefault || false,
     });
   }
 
   function isFormValid() {
-    return Object.keys(formData)
-      .map((key) => formData[key].trim() !== "")
-      .every((item) => item);
+    return Object.values(formData).every(
+      (value) => value !== undefined && value !== null && value.toString().trim() !== ""
+    );
   }
 
   useEffect(() => {
-    dispatch(fetchAllAddresses(user?.id));
-  }, [dispatch]);
+    if (user?.id) {
+      dispatch(fetchAllAddresses(user?.id));
+    }
+  }, [dispatch, user?.id]);
 
   return (
     <Card className="p-6 bg-white shadow-lg rounded-lg">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center mb-4">
-        
-Quản lý địa chỉ của bạn
+          Quản lý địa chỉ của bạn
         </CardTitle>
         <p className="text-gray-600 text-center">
           Hãy chọn hoặc thêm mới địa chỉ của bạn.
@@ -121,22 +129,24 @@ Quản lý địa chỉ của bạn
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {addressList && addressList.length > 0
-            ? addressList.map((singleAddressItem) => (
-                <AddressCard
-                  key={singleAddressItem._id}
-                  selectedId={selectedId}
-                  handleDeleteAddress={handleDeleteAddress}
-                  addressInfo={singleAddressItem}
-                  handleEditAddress={handleEditAddress}
-                  setCurrentSelectedAddress={setCurrentSelectedAddress}
-                />
-              ))
-            : <p className="text-center text-gray-500">No addresses found.</p>}
+          {addressList && addressList.length > 0 ? (
+            addressList.map((singleAddressItem) => (
+              <AddressCard
+                key={singleAddressItem._id}
+                selectedId={selectedId}
+                handleDeleteAddress={handleDeleteAddress}
+                addressInfo={singleAddressItem}
+                handleEditAddress={handleEditAddress}
+                setCurrentSelectedAddress={setCurrentSelectedAddress}
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-500">Không tìm thấy địa chỉ nào.</p>
+          )}
         </div>
         <CardHeader>
           <CardTitle>
-            {currentEditedId !== null ? "Edit Address" : "Add New Address"}
+            {currentEditedId !== null ? "Chỉnh sửa địa chỉ" : "Thêm địa chỉ mới"}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -144,7 +154,7 @@ Quản lý địa chỉ của bạn
             formControls={addressFormControls}
             formData={formData}
             setFormData={setFormData}
-            buttonText={currentEditedId !== null ? "Edit" : "Add"}
+            buttonText={currentEditedId !== null ? "Cập nhật" : "Thêm mới"}
             onSubmit={handleManageAddress}
             isBtnDisabled={!isFormValid()}
           />

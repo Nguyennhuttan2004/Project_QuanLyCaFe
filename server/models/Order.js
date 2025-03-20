@@ -1,58 +1,35 @@
 const mongoose = require("mongoose");
 
-const OrderSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  },
-  cartId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Cart",
-    required: true
-  },
+const orderSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   cartItems: [
     {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true
-      },
-      title: String,
-      image: String,
-      price: Number,
-      quantity: Number,
+      productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+      title: { type: String, required: true },
+      image: { type: String, required: true },
+      price: { type: Number, required: true },
+      quantity: { type: Number, required: true },
     },
   ],
-  addressInfo: {
-    addressId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Address"
-    },
-    address: String,
-    city: String,
-    phone: String,
-    notes: String,
-  },
+  addressId: { type: mongoose.Schema.Types.ObjectId, ref: "Address", required: true },
   orderStatus: {
     type: String,
-    default: "Pending"
+    enum: ["pending", "confirmed", "delivered", "rejected", "inShipping"],
+    default: "pending",
   },
-  paymentMethod: String,
+  paymentMethod: {
+    type: String,
+    enum: ["paypal", "momo", "cash"], // 🔥 Cập nhật đúng giá trị
+    required: true,
+  },
   paymentStatus: {
     type: String,
-    default: "Pending"
+    enum: ["pending", "paid", "failed"],
+    default: "pending",
   },
-  totalAmount: Number,
-  shippingFee: Number,
-  discount: Number,
-  orderDate: {
-    type: Date,
-    default: Date.now
-  },
-  orderUpdateDate: Date,
-  paymentId: String,
-  payerId: String,
+  totalAmount: { type: Number, required: true },
+  orderDate: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Order", OrderSchema);
+const Order = mongoose.model("Order", orderSchema);
+module.exports = Order;

@@ -30,19 +30,24 @@ export const getOrderDetailsForAdmin = createAsyncThunk(
   }
 );
 
+// Cập nhật trạng thái đơn hàng
 export const updateOrderStatus = createAsyncThunk(
   "/order/updateOrderStatus",
-  async ({ id, orderStatus }, { dispatch }) => {
-    const response = await axios.put(
-      `http://localhost:5000/api/admin/orders/update/${id}`,
-      { orderStatus }
-    );
+  async ({ id, orderStatus }, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/admin/orders/update/${id}`, {
+        orderStatus,
+      });
 
-    // Gọi lại các API để cập nhật lại dữ liệu
-    dispatch(getTotalOrders()); // Lấy lại tổng số đơn hàng
-    dispatch(getSalesPerMonth()); // Lấy lại doanh thu theo tháng
-    
-    return response.data; // Trả lại kết quả sau khi cập nhật trạng thái đơn hàng
+      if (response.data.success) {
+        dispatch(getOrderDetailsForAdmin(id));
+        dispatch(getAllOrdersForAdmin());
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { message: "Update failed" });
+    }
   }
 );
 export const getSalesPerMonth = createAsyncThunk(
@@ -70,13 +75,12 @@ export const getTotalOrders = createAsyncThunk(
 );
 
 
+// Slice quản lý state của admin orders
 const adminOrderSlice = createSlice({
   name: "adminOrderSlice",
   initialState,
   reducers: {
     resetOrderDetails: (state) => {
-      console.log("resetOrderDetails");
-
       state.orderDetails = null;
     },
   },
@@ -89,26 +93,18 @@ const adminOrderSlice = createSlice({
         state.isLoading = false;
         state.orderList = action.payload.data;
       })
-      .addCase(getAllOrdersForAdmin.rejected, (state) => {
+      .addCase(getAllOrdersForAdmin.rejected, (state, action) => {
         state.isLoading = false;
         state.orderList = [];
-      })
-      .addCase(getOrderDetailsForAdmin.pending, (state) => {
-        state.isLoading = true;
+        state.error = action.payload;
       })
       .addCase(getOrderDetailsForAdmin.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.orderDetails = action.payload.data;
       })
-      .addCase(getOrderDetailsForAdmin.rejected, (state) => {
-        state.isLoading = false;
-        state.orderDetails = null;
-      })
-      .addCase(getTotalOrders.fulfilled, (state, action) => {
-        state.totalOrders = action.payload.totalOrders; // Cập nhật tổng số đơn hàng
-      })
-      .addCase(getSalesPerMonth.fulfilled, (state, action) => {
-        state.salesData = action.payload.data; // Cập nhật doanh số bán hàng
+      .addCase(updateOrderStatus.fulfilled, (state, action) => {
+        if (action.payload.success) {
+          state.orderDetails.orderStatus = action.payload.updatedStatus;
+        }
       });
   },
 });

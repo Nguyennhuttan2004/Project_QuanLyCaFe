@@ -27,7 +27,7 @@ const About = () => {
 
   return (
     <div className="aka">
-      <section className="about" id="about">
+      <section className="about dark:bg-gray-900" id="about">
         <h1 className="heading">
           about us{" "}
           <span className="text-[#A67C6D] font-bold">why choose us</span>
@@ -38,8 +38,8 @@ const About = () => {
           </div>
           <div className="content">
             <h3 className="title">Mỗi tách cà phê, một câu chuyện</h3>
-            <p>
-              Chào mừng bạn đến với quán cà phê của chún g tôi, nơi mang đến cho
+            <p className="text-gray-700 dark:text-gray-300 ">
+              Chào mừng bạn đến với quán cà phê của chúng tôi, nơi mang đến cho
               bạn những trải nghiệm tuyệt vời nhất. Tại đây, chúng tôi không chỉ
               phục vụ những tách cà phê thơm ngon được chế biến từ hạt cà phê
               chất lượng cao, mà còn tạo ra một không gian ấm cúng và thân
@@ -73,14 +73,14 @@ const About = () => {
         </div>
       </section>
 
-      <section className="menu py-10" id="about">
+      <section className="menu py-10 dark:bg-gray-900" id="about">
         <h1 className="heading text-6xl font-bold text-center m-10 text-[#A67C6D]">
           Menu
         </h1>
         <div className="row flex flex-col md:flex-row items-center justify-center">
           <div className="content text-center md:text-left md:w-1/2 px-4 md:px-0">
             <h3 className="title text-2xl font-semibold ">Các Món Ngon</h3>
-            <p className="text-gray-700 mb-6 mr">
+            <p className="text-gray-700 dark:text-gray-300 mb-6 mr">
               Tại quán cà phê của chúng tôi, chúng tôi tự hào phục vụ nhiều loại
               đồ uống và món ăn nhẹ hấp dẫn. Dù bạn đang muốn thưởng thức một
               tách trà mát lạnh, một ly cà phê đậm đà hay một món ngọt ngào,
@@ -114,10 +114,10 @@ const About = () => {
         </div>
       </section>
 
-      <section className="portfolio">
+      <section className="portfolio dark:bg-gray-900">
         <div className="container">
-        <div className="text-center bg-light p-8 rounded-lg shadow-md">
-            <h1 className="heading text-4xl font-extrabold m-5">
+          <div className="text-center bg-light dark:bg-gray-800 p-8 rounded-lg shadow-md">
+            <h1 className="heading text-4xl m-5 text-[#A67C6D] font-bold">
               Các khuyến mãi
             </h1>
           </div>

@@ -104,14 +104,34 @@ function AdminProducts() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
+  const totalProducts = productList.reduce((acc, product) => acc + product.totalStock, 0);
+
+  const categoryTotals = productList.reduce((acc, product) => {
+    if (!acc[product.category]) {
+      acc[product.category] = 0;
+    }
+    acc[product.category] += product.totalStock;
+    return acc;
+  }, {});
+
   console.log(formData, "productList");
 
   return (
     <Fragment>
-      <div className="mb-5 w-full flex justify-end">
-        <Button onClick={() => setOpenCreateProductsDialog(true)}>
-          Add New Product
-        </Button>
+      <div className="mb-5 w-full">
+        <h2 className="text-2xl font-bold mb-4 text-[#A67C6D]">Tổng số lượng sản phẩm: {totalProducts}</h2>
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Object.keys(categoryTotals).map((category) => (
+            <div key={category} className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+              <span className="font-semibold text-lg text-[#A67C6D]">{category}:</span> <span className="text-lg text-[#B89B8D]">{categoryTotals[category]}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-end">
+          <Button onClick={() => setOpenCreateProductsDialog(true)} className="bg-[#A67C6D] text-white">
+            Add New Product
+          </Button>
+        </div>
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
         {productList && productList.length > 0

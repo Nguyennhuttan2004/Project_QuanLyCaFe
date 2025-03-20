@@ -5,15 +5,24 @@ const {
   getAllOrdersByUser,
   getOrderDetails,
   capturePayment,
-  getTotalRevenue
-} = require("../../controllers/shop/order-controller.js");
+  getTotalRevenue,
+} = require("../../controllers/shop/order-controller");
 
 const router = express.Router();
 
-router.post("/create", createOrder);
+// Tạo đơn hàng
+router.post("/", createOrder);
+
+// Thanh toán đơn hàng (PayPal)
 router.post("/capture", capturePayment);
-router.get("/list/:userId", getAllOrdersByUser);
-router.get("/details/:id", getOrderDetails);
-router.get('/total-revenue', getTotalRevenue);
+
+// Lấy danh sách đơn hàng của người dùng
+router.get("/user/:userId", getAllOrdersByUser);
+
+// Lấy chi tiết đơn hàng
+router.get("/:id", getOrderDetails);
+
+// Thống kê tổng doanh thu
+router.get("/stats/total-revenue", getTotalRevenue);
 
 module.exports = router;

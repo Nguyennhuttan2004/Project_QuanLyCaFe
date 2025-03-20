@@ -5,6 +5,9 @@ import {
   ChevronRightIcon,
   LucideCoffee,
   MilkIcon,
+  Moon,
+  MoonIcon,
+  Sun,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -19,13 +22,15 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import "./../../css/video.css";
 import videoSource from "./../../assets/coffeeshop.mp4";
 import imageVideo from "./../../assets/videoimage.jpg";
-import { getFeatureImages } from "/store/common/common-slice";
 import img1 from "../../assets/image/about-img.png";
 import img2 from "../../assets/image/about-icon-1.png";
 import img3 from "../../assets/image/about-icon-2.png";
 import img4 from "../../assets/image/about-icon-3.png";
-import KommunicateChat from '../../components/common/KommunicateChat';
+import KommunicateChat from "../../components/common/KommunicateChat";
 import "../../css/home.css";
+import { getFeatureImages } from "/store/common/common-slice/index.js";
+import { useTheme } from "../../context/theme-context";
+import "./../../css/toggle.css"; // Thêm file CSS cho toggle
 const categories = [
   { id: "bestSeller", label: "Best Seller", icon: LucideCoffee },
   { id: "traSua", label: "Trà Sữa", icon: MilkIcon },
@@ -46,7 +51,7 @@ function ShoppingHome() {
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
-  // const slides = [bannerOne, bannerTwo, bannerThree];
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -54,7 +59,7 @@ function ShoppingHome() {
     }, 2000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [featureImageList]);
 
   useEffect(() => {
     dispatch(
@@ -127,61 +132,80 @@ function ShoppingHome() {
   }, [productDetails]);
   console.log("Feature Image List:", featureImageList);
 
-
   const handleReadMore = () => {
     navigate(`/shop/about`);
   };
 
-  const isHomePage = true; 
+  const isHomePage = true;
   return (
     <>
-      <div className="flex flex-col min-h-screen">
-      <div className="p-10">
-      <div className=" relative w-full h-[600px] overflow-hidden ">
-          {featureImageList && featureImageList.length > 0 ? (
-            featureImageList.map((slide, index) => (
-              <img
-                src={slide?.image} // Đảm bảo rằng slide.image có giá trị hợp lệ
-                key={index}
-                className={`${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-                alt={`Banner ${index + 1}`} // Thêm alt cho hình ảnh
-              />
-            ))
-          ) : (
-            <p className="text-center">Không có hình ảnh nào để hiển thị.</p> // Thông báo nếu không có hình ảnh
-          )}
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
-            onClick={() =>
-              setCurrentSlide(
-                (prevSlide) =>
-                  (prevSlide - 1 + featureImageList.length) %
-                  featureImageList.length
-              )
-            }
-          >
-            <ChevronLeftIcon className="w-4 h-4" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"
-            onClick={() =>
-              setCurrentSlide(
-                (prevSlide) => (prevSlide + 1) % featureImageList.length
-              )
-            }
-          >
-            <ChevronRightIcon className="w-4 h-4" />
-          </Button>
+      <div
+      className={`flex flex-col min-h-screen ${isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}
+      >
+        <header className="p-4 flex justify-between items-center">
+        <div className="toggle-container">
+            <input
+              type="checkbox"
+              id="switch"
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+            />
+            <label htmlFor="switch" className="toggle-label">
+              <span className="toggle-circle">
+                {isDarkMode ? <Moon color="#3e1e94" strokeWidth={2.5} /> : <Sun color="#f5b151" strokeWidth={2.5} />}
+              </span>
+              <span className="toggle-names">
+                <p className="sun"></p>
+                <p className="moon"></p>
+              </span>
+            </label>
+          </div>
+        </header>
+        <div className="p-10">
+          <div className="relative w-full h-[600px] overflow-hidden">
+            {featureImageList && featureImageList.length > 0 ? (
+              featureImageList.map((slide, index) => (
+                <img
+                  src={slide?.image}
+                  key={index}
+                  className={`${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+                  alt={`Banner ${index + 1}`}
+                />
+              ))
+            ) : (
+              <p className="text-center">Không có hình ảnh nào để hiển thị.</p>
+            )}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
+              onClick={() =>
+                setCurrentSlide(
+                  (prevSlide) =>
+                    (prevSlide - 1 + featureImageList.length) %
+                    featureImageList.length
+                )
+              }
+            >
+              <ChevronLeftIcon className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"
+              onClick={() =>
+                setCurrentSlide(
+                  (prevSlide) => (prevSlide + 1) % featureImageList.length
+                )
+              }
+            >
+              <ChevronRightIcon className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
-      </div>
-
-        <section className="py-12 bg-gray-50">
+        <section className="py-12 bg-gray-50 dark:bg-gray-800">
           <div className="container mx-auto px-4">
             <h2 className="text-9xl uppercase text-custom-gray text-center relative mb-10">
               Danh mục
@@ -206,7 +230,7 @@ function ShoppingHome() {
             </div>
           </div>
         </section>
-        <section className="py-12">
+        <section className="py-12 dark:bg-gray-800">
           <div className="container mx-auto px-4">
             <h2 className="text-9xl uppercase text-custom-gray text-center relative mb-10">
               Sản phẩm
@@ -236,15 +260,16 @@ function ShoppingHome() {
             </div>
           </div>
         </section>
-
-        <section className="digital py-12">
+        <section className="digital py-12 dark:bg-gray-800">
           <div className="container">
             <div className="digital_title">
-            <p className="sub_title">CÀ PHÊ CỦA CHÚNG TÔI</p>
-              <h2 className="text-6xl font-bold text-center m-10 text-[#A67C6D]">TRẢI NGHIỆM CÀ PHÊ</h2>
+              <p className="sub_title">CÀ PHÊ CỦA CHÚNG TÔI</p>
+              <h2 className="text-6xl font-bold text-center m-10 text-[#A67C6D]">
+                TRẢI NGHIỆM CÀ PHÊ
+              </h2>
               <p>
-                Chúng tôi cam kết mang đến cho khách hàng dịch vụ xuất sắc
-                trong khi cung cấp cho nhân viên của chúng tôi <br />
+                Chúng tôi cam kết mang đến cho khách hàng dịch vụ xuất sắc trong
+                khi cung cấp cho nhân viên của chúng tôi <br />
                 đào tạo tốt nhất.
               </p>
             </div>
@@ -255,7 +280,7 @@ function ShoppingHome() {
                 controls
                 preload="auto"
                 autoPlay
-                src={videoSource} 
+                src={videoSource}
                 onError={(e) => {
                   console.error("Video failed to load:", e);
                 }}
@@ -263,76 +288,66 @@ function ShoppingHome() {
             </div>
           </div>
         </section>
-
-        <div className="flex flex-col min-h-screen">
-        <div className="p-10">
-          {/* Chỉ hiển thị đoạn mã của About */}
-          <section className="about" id="about">
-            <h1 className="heading">
-              about us{" "}
-              <span className="text-[#A67C6D] font-bold">why choose us</span>
-            </h1>
-            <div className="row">
-              <div className="image">
-                <img src={img1} alt="" />
-              </div>
-              <div className="content">
-                <h3 className="title">Mỗi tách cà phê, một câu chuyện</h3>
-                <p>
-                  Chào mừng bạn đến với quán cà phê của chúng tôi, nơi mang đến cho
-                  bạn những trải nghiệm tuyệt vời nhất. Tại đây, chúng tôi không chỉ
-                  phục vụ những tách cà phê thơm ngon được chế biến từ hạt cà phê
-                  chất lượng cao, mà còn tạo ra một không gian ấm cúng và thân
-                  thiện, lý tưởng cho những buổi gặp gỡ bạn bè hay những giờ phút
-                  thư giãn một mình. Với đội ngũ nhân viên nhiệt tình và chuyên
-                  nghiệp, chúng tôi cam kết mang đến cho bạn dịch vụ tốt nhất. Hãy
-                  đến và khám phá hương vị độc đáo của từng ly cà phê, cùng với
-                  những món ăn nhẹ hấp dẫn, để cảm nhận sự khác biệt mà chúng tôi
-                  mang lại!
-                </p>
-                {isHomePage && (
-              <button onClick={handleReadMore} className="btn">
-                Đọc thêm
-              </button>
-            )}
-                <div className="icons-container">
-                  <div className="icons">
-                    <img src={img2} alt="" />
-                    <h3>cà phê chất lượng</h3>
-                  </div>
-                  <div className="icons">
-                    <img src={img3} alt="" />
-                    <h3>chi nhánh của chúng tôi</h3>
-                  </div>
-                  <div className="icons">
-                    <img src={img4} alt="" />
-                    <h3>giao hàng miễn phí</h3>
+        <div className="flex flex-col min-h-screen dark:bg-gray-800">
+          <div className="p-10">
+            <section className="about" id="about">
+              <h1 className="heading">
+                about us{" "}
+                <span className="text-[#A67C6D] font-bold">why choose us</span>
+              </h1>
+              <div className="row">
+                <div className="image">
+                  <img src={img1} alt="" />
+                </div>
+                <div className="content">
+                  <h3 className="title">Mỗi tách cà phê, một câu chuyện</h3>
+                  <p>
+                    Chào mừng bạn đến với quán cà phê của chúng tôi, nơi mang
+                    đến cho bạn những trải nghiệm tuyệt vời nhất. Tại đây, chúng
+                    tôi không chỉ phục vụ những tách cà phê thơm ngon được chế
+                    biến từ hạt cà phê chất lượng cao, mà còn tạo ra một không
+                    gian ấm cúng và thân thiện, lý tưởng cho những buổi gặp gỡ
+                    bạn bè hay những giờ phút thư giãn một mình. Với đội ngũ
+                    nhân viên nhiệt tình và chuyên nghiệp, chúng tôi cam kết
+                    mang đến cho bạn dịch vụ tốt nhất. Hãy đến và khám phá hương
+                    vị độc đáo của từng ly cà phê, cùng với những món ăn nhẹ hấp
+                    dẫn, để cảm nhận sự khác biệt mà chúng tôi mang lại!
+                  </p>
+                  {isHomePage && (
+                    <button onClick={handleReadMore} className="btn">
+                      Đọc thêm
+                    </button>
+                  )}
+                  <div className="icons-container">
+                    <div className="icons">
+                      <img src={img2} alt="" />
+                      <h3>cà phê chất lượng</h3>
+                    </div>
+                    <div className="icons">
+                      <img src={img3} alt="" />
+                      <h3>chi nhánh của chúng tôi</h3>
+                    </div>
+                    <div className="icons">
+                      <img src={img4} alt="" />
+                      <h3>giao hàng miễn phí</h3>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
-      </div>
-
-        {/* <Chatbot /> */}
         <div className="">
-        <KommunicateChat />   
+          <KommunicateChat />
         </div>
-
         <ProductDetailsDialog
           open={openDetailsDialog}
           setOpen={setOpenDetailsDialog}
           productDetails={productDetails}
         />
       </div>
-
-
-      
     </>
   );
 }
-
-
 
 export default ShoppingHome;

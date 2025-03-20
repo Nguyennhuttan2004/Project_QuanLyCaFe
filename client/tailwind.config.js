@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	darkMode: ["class"],
+	darkMode: "class", // Kích hoạt chế độ dark mode dựa trên class
 	content: [
 	  './pages/**/*.{js,jsx}',
 	  './components/**/*.{js,jsx}',
 	  './app/**/*.{js,jsx}',
-	  './src/**/*.{js,jsx}',
+	  './src/**/*.{js,jsx,ts,tsx}', // Đảm bảo Tailwind quét toàn bộ file
 	],
 	prefix: "",
 	theme: {
@@ -29,7 +29,7 @@ module.exports = {
 
 		  },
 		  primary: {
-			DEFAULT: "hsl(var(--primary))",
+			DEFAULT: "#A67C6D", // Màu chính
 			foreground: "hsl(var(--primary-foreground))",
 		  },
 		  secondary: {
@@ -78,5 +78,5 @@ module.exports = {
 		},
 	  },
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [],
   }

@@ -69,14 +69,14 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
+    <div className="bg-gray-100 dark:bg-gray-900 p-6 rounded-lg shadow-lg">
       {successMessage && (
-        <div className="bg-green-100 text-green-700 p-4 rounded-lg mb-4">
+        <div className="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 p-4 rounded-lg mb-4">
           {successMessage}
         </div>
       )}
       {errorMessage && (
-        <div className="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+        <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-4 rounded-lg mb-4">
           {errorMessage}
         </div>
       )}
@@ -100,24 +100,24 @@ const ContactPage = () => {
         </MapContainer>
       </div>
       <div className="flex space-x-6 mt-8">
-        <div className="w-1/3 bg-white p-4 rounded-lg shadow-md">
+        <div className="w-1/3 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
           <h1 className="text-3xl leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10">
             Thông tin liên hệ
           </h1>
           <ul className="space-y-4">
-            <li className="flex items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <li className="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               <PhoneIcon className="ml-2 mt-2 text-[#A67C6D] w-6 h-6" />
-              <span className="text-gray-800 font-semibold">1800-123-4567</span>
+              <span className="text-gray-800 dark:text-gray-200 font-semibold">1800-123-4567</span>
             </li>
-            <li className="flex items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <li className="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               <Mail className="ml-2 mt-2 text-[#A67C6D] w-6 h-6" />
-              <span className="text-gray-800 font-semibold">
+              <span className="text-gray-800 dark:text-gray-200 font-semibold">
                 info@example.com
               </span>
             </li>
-            <li className="flex items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <li className="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               <MapPin className="ml-2 mt-2 text-[#A67C6D] w-6 h-6" />
-              <span className="text-gray-800 font-semibold">
+              <span className="text-gray-800 dark:text-gray-200 font-semibold">
                 Huflit Campus HocMon
                 <br />
                 University
@@ -128,23 +128,23 @@ const ContactPage = () => {
         <div className="w-2/3">
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 bg-white p-6 rounded-lg shadow-md border border-gray-300"
+            className="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-300 dark:border-gray-700"
           >
             <h2 className="leading-8 text-[#A67C6D] font-bold text-center my-5 uppercase tracking-wide mb-10 text-3xl">
               Hỗ trợ khách hàng
             </h2>
             {successMessage && (
-              <div className="bg-green-100 text-green-700 p-4 rounded-lg mb-4">
+              <div className="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 p-4 rounded-lg mb-4">
                 {successMessage}
               </div>
             )}
             {errorMessage && (
-              <div className="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+              <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-4 rounded-lg mb-4">
                 {errorMessage}
               </div>
             )}
             <div>
-              <label className="block text-gray-700 font-semibold">
+              <label className="block text-gray-700 dark:text-gray-200 font-semibold">
                 Your name:
               </label>
               <input
@@ -153,11 +153,11 @@ const ContactPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-semibold">
+              <label className="block text-gray-700 dark:text-gray-200 font-semibold">
                 Email:
               </label>
               <input
@@ -166,11 +166,11 @@ const ContactPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-semibold">
+              <label className="block text-gray-700 dark:text-gray-200 font-semibold">
                 What do you need our support for?
               </label>
               <textarea
@@ -178,7 +178,7 @@ const ContactPage = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                 rows="4"
               />
             </div>
